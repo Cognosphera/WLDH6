@@ -10,4 +10,21 @@ public:
       int j = i+1, k = n-1, t = target-a[i];
       while (j < k) {
         if (a[j]+a[k] < t) {
-          
+          if (t-a[j]-a[k] < opt) {
+            opt = t-a[j]-a[k];
+            opts = a[i]+a[j]+a[k];
+          }
+          j++;
+        } else if (a[j]+a[k] > t) {
+          if (a[j]+a[k]-t < opt) {
+            opt = a[j]+a[k]-t;
+            opts = a[i]+a[j]+a[k];
+          }
+          k--;
+        } else
+          return target;
+      }
+    }
+    return opts;
+  }
+};
