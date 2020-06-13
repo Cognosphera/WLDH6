@@ -18,4 +18,21 @@ public:
         old = a[j];
         while (++j < n && a[j] == old);
       }
-      /
+      // a < b = b <= c
+      if (i+1 < n && a[i] == a[i+1]) {
+        for (int j = i+2; j < n; ) {
+          int t = target-a[i]*2-a[j];
+          auto it = lower_bound(a.begin(), a.begin()+i, t);
+          if (it != a.begin()+i && *it == t) {
+            vector<int> b{*it, a[i], a[i], a[j]};
+            r.push_back(b);
+          }
+          old = a[j];
+          while (++j < n && a[j] == old);
+        }
+      }
+      // a = a = a <= b
+      if (i+2 < n && a[i] == a[i+2]) {
+        int t = target-a[i]*3;
+        auto it = lower_bound(a.begin()+i+3, a.end(), t);
+        if (it 
