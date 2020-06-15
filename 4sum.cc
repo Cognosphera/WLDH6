@@ -35,4 +35,21 @@ public:
       if (i+2 < n && a[i] == a[i+2]) {
         int t = target-a[i]*3;
         auto it = lower_bound(a.begin()+i+3, a.end(), t);
-        if (it 
+        if (it != a.end() && *it == t) {
+          vector<int> b{a[i], a[i], a[i], t};
+          r.push_back(b);
+        }
+      }
+      old = a[i];
+      while (i+1 < n && a[i+1] == old)
+        i++;
+      for (int j = 0; j < i; ) {
+        m.insert(make_pair(a[j]+a[i], a[j]));
+        old = a[j];
+        while (++j < n && a[j] == old);
+      }
+      i++;
+    }
+    return r;
+  }
+};
