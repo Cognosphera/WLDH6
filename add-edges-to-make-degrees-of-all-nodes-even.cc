@@ -20,4 +20,18 @@ public:
     if (odd == 0) return true;
     if (odd > 4) return false;
 
-    aut
+    auto f = [&](int u, int v) {
+      return es[u].count(v);
+    };
+    if (odd == 2) {
+      REP(i, n)
+        if (!f(i, vs[0]) && !f(i, vs[1]))
+          return true;
+    } else {
+      REP(i, 3)
+        if (!f(vs[i], vs[3]) && !f(vs[(i+1)%3], vs[(i+2)%3]))
+          return true;
+    }
+    return false;
+  }
+};
