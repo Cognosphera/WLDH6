@@ -19,4 +19,20 @@ public:
       }
     }
     string r;
-    for (int i = 0;
+    for (int i = 0; i < 26; i++)
+      if (f[i]) {
+        ab++;
+        if (! d[i])
+          d[i] = top, top = i;
+      }
+    while (top != -1) {
+      int x = top;
+      top = d[x];
+      r.push_back('a'+x);
+      for (auto y: e[x])
+        if (! --d[y])
+          d[y] = top, top = y;
+    }
+    return r.size() < ab ? "" : r;
+  }
+};
