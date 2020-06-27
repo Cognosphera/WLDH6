@@ -17,4 +17,23 @@ public:
                 if (t < 0)
                   t += 10, b = 1;
                 else
-  
+                  b = 0;
+                if (! t)
+                  zero++;
+                else {
+                  for (; zero; zero--)
+                    if (! k || num[--k] != '0')
+                      goto out;
+                  if (! k || num[--k]-'0' != t)
+                    goto out;
+                }
+              }
+              if (k == r && (! k || num[--k] != '0'))
+                goto out;
+              if (! k) {
+                if (j == r) return true;
+                goto out;
+              }
+              p = q;
+              q = r;
+        
