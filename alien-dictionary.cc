@@ -1,1 +1,22 @@
-// A
+// Alien Dictionary
+class Solution {
+public:
+  string alienOrder(vector<string>& words) {
+    bool f[26] = {};
+    int d[26] = {}, top = -1, ab = 0;
+    vector<int> e[26];
+    for (auto &w: words)
+      for (auto c: w)
+        f[c-'a'] = true;
+    for (int i = 1; i < words.size(); i++) {
+      string &x = words[i-1], &y = words[i];
+      int j = 0;
+      while (x[j] == y[j] && x[j])
+        j++;
+      if (x[j] && y[j]) {
+        e[x[j]-'a'].push_back(y[j]-'a');
+        d[y[j]-'a']++;
+      }
+    }
+    string r;
+    for (int i = 0;
