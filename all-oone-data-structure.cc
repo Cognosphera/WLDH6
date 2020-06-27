@@ -26,4 +26,27 @@ public:
   }
 
   /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
-  void dec(string
+  void dec(string key) {
+    if (a.count(key)) {
+      auto y = a[key], x = y--;
+      if (x->v > 1) {
+        if (x == b.begin() || y->v < x->v-1)
+          y = b.insert(x, {x->v-1, {}});
+        a[key] = y;
+        y->ks.insert(key);
+      } else
+        a.erase(key);
+      x->ks.erase(key);
+      if (x->ks.empty())
+        b.erase(x);
+    }
+  }
+
+  /** Returns one of the keys with maximal value. */
+  string getMaxKey() {
+    return b.size() == 1 ? "" : *b.rbegin()->ks.begin();
+  }
+
+  /** Returns one of the keys with Minimal value. */
+  string getMinKey() {
+    return b.size() == 1 ? "" : *(++b.b
