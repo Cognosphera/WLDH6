@@ -49,4 +49,15 @@ public:
 
   /** Returns one of the keys with Minimal value. */
   string getMinKey() {
-    return b.size() == 1 ? "" : *(++b.b
+    return b.size() == 1 ? "" : *(++b.begin())->ks.begin();
+  }
+};
+
+/**
+ * Your AllOne object will be instantiated and called as such:
+ * AllOne obj = new AllOne();
+ * obj.inc(key);
+ * obj.dec(key);
+ * string param_3 = obj.getMaxKey();
+ * string param_4 = obj.getMinKey();
+ */
