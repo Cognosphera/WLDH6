@@ -7,4 +7,19 @@ class Solution {
       if (!y) continue;
       auto [h1, dep1] = dfs(y);
       if (dep >= 0)
-        ans = max(ans, d
+        ans = max(ans, dep+1+h1);
+      else if (dep1 >= 0) {
+        ans = max(ans, h+1+dep1);
+        dep = dep1+1;
+      }
+      h = max(h, h1+1);
+    }
+    return {h, dep};
+  }
+public:
+  int amountOfTime(TreeNode* root, int start) {
+    this->start = start;
+    dfs(root);
+    return ans;
+  }
+};
