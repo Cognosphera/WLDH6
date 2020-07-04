@@ -9,4 +9,15 @@ public:
       string ss = s;
       sort(ss.begin(), ss.end());
       if (c.count(ss)) {
-        
+        if (c[ss] == 1)
+          r.push_back(p[ss]);
+        r.push_back(s);
+        c[ss]++;
+      } else {
+        c[ss] = 1;
+        p[ss] = s;
+      }
+    }
+    return r;
+  }
+};
