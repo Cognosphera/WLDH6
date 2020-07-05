@@ -7,4 +7,11 @@ public:
     auto i = s.begin();
     int r = 0;
     for (int x: g) {
-      wh
+      while (i != s.end() && *i < x) ++i;
+      if (i == s.end()) break;
+      ++i;
+      r++;
+    }
+    return r;
+  }
+};
