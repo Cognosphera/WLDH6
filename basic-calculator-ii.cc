@@ -29,4 +29,15 @@ public:
           case '+': xs.push(x+y); break;
           case '-': xs.push(x-y); break;
           case '*': xs.push(x*y); break;
-          case '
+          case '/': xs.push(x/y); break;
+          }
+        }
+        if (isp[ops.top()] == icp[op]) // reduce, '(' X ')' => X  or  '\0' X '\0' => X
+          ops.pop();
+        else
+          ops.push(op); // shift
+      }
+    }
+    return xs.top();
+  }
+};
