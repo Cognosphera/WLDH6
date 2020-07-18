@@ -23,4 +23,16 @@ public:
         i++;
         int x, y;
         for (; isp[ops.top()] > icp[op]; ops.pop()) {
-          y = xs.top(); xs.pop()
+          y = xs.top(); xs.pop();
+          x = xs.top(); xs.pop();
+          xs.push(ops.top() == '+' ? x+y : x-y); // reduce, X '+' Y => X+Y  or  X '-' Y => X-Y
+        }
+        if (isp[ops.top()] == icp[op]) // reduce, '(' X ')' => X  or  '\0' X '\0' => X
+          ops.pop();
+        else
+          ops.push(op); // shift
+      }
+    }
+    return xs.top();
+  }
+};
