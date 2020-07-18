@@ -9,4 +9,15 @@ public:
     REP(i, grid.size())
       REP(j, grid[0].size())
       if (grid[i][j]) {
-        x
+        xs.push_back(i);
+        ys.push_back(j);
+      }
+    nth_element(ys.begin(), ys.begin()+ys.size()/2, ys.end());
+    int d = 0, rx = xs[xs.size()/2], ry = ys[ys.size()/2];
+    for (auto x: xs)
+      d += abs(x - rx);
+    for (auto y: ys)
+      d += abs(y - ry);
+    return d;
+  }
+};
