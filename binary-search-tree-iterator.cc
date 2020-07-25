@@ -32,4 +32,31 @@ public:
 
   BSTIterator(TreeNode *t) : x(t) {}
 
-  /** @return whether
+  /** @return whether we have a next smallest number */
+  bool hasNext() {
+    return x != NULL;
+  }
+
+  /** @return the next smallest number */
+  int next() {
+    int r;
+    for(;;) {
+      TreeNode *y = x->left;
+      if (y) {
+        while (y->right && y->right != x)
+          y = y->right;
+        if (y->right)
+          y->right = NULL;
+        else {
+          y->right = x;
+          x = x->left;
+          continue;
+        }
+      }
+      r = x->val;
+      x = x->right;
+      break;
+    }
+    return r;
+  }
+};
