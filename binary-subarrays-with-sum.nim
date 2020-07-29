@@ -7,4 +7,7 @@ proc numSubarraysWithSum(nums: ptr UncheckedArray[cint], numsSize: int, goal: in
     s += nums[i]
     while j < i and s-nums[j] >= goal:
       if nums[j] > 0: prev = j
-      s -= n
+      s -= nums[j]
+      j += 1
+    if s == goal:
+      result += j-prev
