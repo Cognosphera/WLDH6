@@ -1,7 +1,8 @@
-// Binary Tree Level Order Traversal II
+
+// Binary Tree Level Order Traversal
 class Solution {
 public:
-  vector<vector<int> > levelOrderBottom(TreeNode *root) {
+  vector<vector<int> > levelOrder(TreeNode *root) {
     vector<vector<int>> r;
     if (! root) return r;
     queue<pair<TreeNode *, int>> q;
@@ -15,7 +16,6 @@ public:
       if (x->left) q.push(make_pair(x->left, d+1));
       if (x->right) q.push(make_pair(x->right, d+1));
     }
-    reverse(r.begin(), r.end());
     return r;
   }
 };
