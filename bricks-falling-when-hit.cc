@@ -16,4 +16,29 @@ public:
     }
   }
   vector<int> hitBricks(vector<vector<int>> &g, vector<vector<int>> &hits) {
-    vector<int> ans(hits.size())
+    vector<int> ans(hits.size());
+    m = g.size();
+    n = g[0].size();
+    for (auto &h: hits)
+      g[h[0]][h[1]]--;
+    REP(i, n)
+      if (g[0][i] == 1)
+        dfs(g, 0, i);
+    for (int i = hits.size(); i--; ) {
+      int old = num;
+      int x = hits[i][0], y = hits[i][1];
+      if (g[x][y]++) continue;
+      bool f = !x;
+      REP(d, 4) {
+        unsigned x1 = x+dx[d], y1 = y+dy[d];
+        if (x1 < m && y1 < n && g[x1][y1] == 2)
+          f = true;
+      }
+      if (f) {
+        dfs(g, x, y);
+        ans[i] = num-old-1;
+      }
+    }
+    return ans;
+  }
+};
