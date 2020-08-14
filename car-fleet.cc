@@ -14,3 +14,10 @@ public:
     sort(ALL(a));
     double l = -1, t;
     ROF(i, 0, n) {
+      tie(x, y) = a[i];
+      if ((t = double(target-x)/y) > l)
+        l = t, r++;
+    }
+    return r;
+  }
+};
