@@ -13,4 +13,8 @@ impl Solution {
         for i in 0..25 {
             pa += ca[i];
             pb += cb[i];
-            ans = ans.min(na-pa+pb).min(nb-pb+pa)
+            ans = ans.min(na-pa+pb).min(nb-pb+pa).min(na-ca[i]+nb-cb[i]);
+        }
+        ans as i32
+    }
+}
