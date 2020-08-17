@@ -41,4 +41,27 @@ class Solution {
     return ret;
   }
 public:
-  bool p
+  bool possiblyEquals(string s1, string s2) {
+    this->s1 = move(s1);
+    this->s2 = move(s2);
+    allo = pool;
+    fill_n(head, sizeof(head)/sizeof(*head), nullptr);
+    return f(0, 0, 0);
+  }
+};
+
+/// unordered_map (slow)
+
+class Solution {
+  static const int BASE = 999*10;
+  string s1, s2;
+  unordered_map<unsigned, char> memo;
+  bool f(int i, int j, int p) {
+    char &ret = memo[((p+BASE)*41+i)*41+j];
+    if (ret) return ret-1;
+    if (s1.size() == i && s2.size() == j) return !p;
+
+    if (unsigned(s1[i]-'0') < 10) {
+      int x = 0;
+      do {
+   
