@@ -64,4 +64,23 @@ class Solution {
     if (unsigned(s1[i]-'0') < 10) {
       int x = 0;
       do {
-   
+        x = x*10+s1[i]-'0';
+        ret = f(++i, j, p+x);
+      } while (!ret && unsigned(s1[i]-'0') < 10);
+    } else if (unsigned(s2[j]-'0') < 10) {
+      int x = 0;
+      do {
+        x = x*10+s2[j]-'0';
+        ret = f(i, ++j, p-x);
+      } while (!ret && unsigned(s2[j]-'0') < 10);
+    } else {
+      if (p > 0) {
+        if (j < s2.size())
+          ret = f(i, j+1, p-1);
+      } else if (p < 0) {
+        if (i < s1.size())
+          ret = f(i+1, j, p+1);
+      } else if (s1[i] == s2[j])
+        ret = f(i+1, j+1, p);
+    }
+    return ret++;
