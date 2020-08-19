@@ -84,3 +84,11 @@ class Solution {
         ret = f(i+1, j+1, p);
     }
     return ret++;
+  }
+public:
+  bool possiblyEquals(string s1, string s2) {
+    this->s1 = s1;
+    this->s2 = s2;
+    return f(0, 0, 0);
+  }
+};
