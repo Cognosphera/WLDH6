@@ -17,4 +17,12 @@ impl Solution {
             if let Some(&x) = tree.range(..q[0]).next_back() {
                 ret[i] = x;
             }
-            if let Some(&x)
+            if let Some(&x) = tree.range(q[0]..).next() {
+                if ret[i] == -1 || q[0]-ret[i] > x-q[0] {
+                    ret[i] = x;
+                }
+            }
+        }
+        ret
+    }
+}
