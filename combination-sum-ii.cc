@@ -19,4 +19,7 @@ public:
     vector<int> rr;
     vector<vector<int>> r;
     sort(a.begin(), a.end());
-   
+    f(r, rr, a, 0, s);
+    return r;
+  }
+};
