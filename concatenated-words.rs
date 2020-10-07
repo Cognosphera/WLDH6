@@ -19,3 +19,20 @@ impl Solution {
             while let Some(bgn) = q.pop() {
                 let mut t: &Trie = &mut trie;
                 for i in bgn..w.len() {
+                    if let Some(t1) = &t.c[(w[i]-b'a') as usize] {
+                        t = t1;
+                        if t.is_word && vis[i+1] != tick {
+                            vis[i+1] = tick;
+                            q.push(i+1);
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                if vis[w.len()] == tick {
+                    ans.push(ww.clone());
+                    break;
+                }
+            }
+
+            le
