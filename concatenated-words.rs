@@ -53,4 +53,20 @@ struct Trie { c: [Option<Box<Self>>; 26], is_word: bool }
 impl Solution {
     pub fn find_all_concatenated_words_in_a_dict(mut words: Vec<String>) -> Vec<String> {
         struct St<'a> { root: &'a Trie, memo: &'a mut [(isize,bool)], tick: isize, w: &'a [u8] };
-        fn dfs(st: &mut St, mu
+        fn dfs(st: &mut St, mut t: &Trie, bgn: usize) -> bool {
+            if st.memo[bgn].0 == st.tick { return st.memo[bgn].1 }
+            let w = st.w;
+            if w.len() == bgn { return true; }
+            let mut ans = false;
+            for i in bgn..w.len() {
+                if let Some(t1) = &t.c[(w[i]-b'a') as usize] {
+                    t = t1;
+                    if t1.is_word && dfs(st, st.root, i+1) {
+                        ans = true;
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+       
