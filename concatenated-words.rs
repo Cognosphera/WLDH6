@@ -82,4 +82,14 @@ impl Solution {
             tick += 1;
             let mut st = St { root: &trie, memo: &mut memo, tick, w: w.as_bytes() };
             if w.len() > 0 && dfs(&mut st, &trie, 0) {
-                ans.push(w.to_
+                ans.push(w.to_owned());
+            }
+            let mut t = &mut trie;
+            for c in w.as_bytes().iter().map(|ch| (ch-b'a') as usize) {
+                t = t.c[c].get_or_insert_with(|| Default::default());
+            }
+            t.is_word = true;
+        }
+        ans
+    }
+}
