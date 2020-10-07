@@ -35,4 +35,22 @@ impl Solution {
                 }
             }
 
-            le
+            let mut t = &mut trie;
+            for c in w.iter().map(|ch| (ch-b'a') as usize) {
+                t = t.c[c].get_or_insert_with(|| Default::default());
+            }
+            t.is_word = true;
+        }
+        ans
+    }
+}
+
+/// memoization
+
+#[derive(Default)]
+struct Trie { c: [Option<Box<Self>>; 26], is_word: bool }
+
+impl Solution {
+    pub fn find_all_concatenated_words_in_a_dict(mut words: Vec<String>) -> Vec<String> {
+        struct St<'a> { root: &'a Trie, memo: &'a mut [(isize,bool)], tick: isize, w: &'a [u8] };
+        fn dfs(st: &mut St, mu
