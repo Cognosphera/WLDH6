@@ -69,4 +69,17 @@ impl Solution {
                     break;
                 }
             }
-       
+            st.memo[bgn] = (st.tick, ans);
+            ans
+        }
+
+        words.sort_by_key(|w| w.len());
+        let mut trie: Trie = Default::default();
+        let mut memo: Vec<(isize,bool)> = vec![(0, false); words.last().unwrap().len()+1];
+        let mut tick = 0;
+        let mut ans: Vec<String> = vec![];
+        for w in words.into_iter() {
+            tick += 1;
+            let mut st = St { root: &trie, memo: &mut memo, tick, w: w.as_bytes() };
+            if w.len() > 0 && dfs(&mut st, &trie, 0) {
+                ans.push(w.to_
