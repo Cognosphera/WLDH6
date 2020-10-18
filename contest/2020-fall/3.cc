@@ -3,4 +3,24 @@
 
 class Solution {
 public:
-  vector<int> numsGam
+  vector<int> numsGame(vector<int>& nums) {
+    int n = nums.size();
+    long s0 = nums[0], s1 = 0;
+    priority_queue q0{less{}, vector{nums[0]}};
+    priority_queue q1{greater{}, vector<int>{}};
+    vector ret{0};
+    FOR(i, 1, n) {
+      int x = nums[i]-i;
+      if (x < q0.top()) {
+        q0.push(x);
+        s0 += x;
+        if (q0.size() == q1.size()+2) {
+          q1.push(q0.top());
+          s1 += q0.top();
+          s0 -= q0.top();
+          q0.pop();
+        }
+      } else {
+        q1.push(x);
+        s1 += x;
+        
