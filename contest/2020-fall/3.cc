@@ -23,4 +23,15 @@ public:
       } else {
         q1.push(x);
         s1 += x;
-        
+        if (q1.size() == q0.size()+1) {
+          q0.push(q1.top());
+          s0 += q1.top();
+          s1 -= q1.top();
+          q1.pop();
+        }
+      }
+      ret.push_back((i%2 ? s1-s0 : s1-s0+q0.top()) % 1000000007);
+    }
+    return ret;
+  }
+};
