@@ -22,4 +22,32 @@ int augment(int u, int d, int sink) {
         int dd = augment(v, min(d, e[i].c), sink);
         e[i].c -= dd;
         e[i^1].c += dd;
-        if (!(d -= dd) || h[sink-
+        if (!(d -= dd) || h[sink-1] > sink) break;
+      }
+      minh = min(minh, h[v]);
+    }
+  if (d == old) {
+    if (!--nh[h[u]]) h[sink-1] = sink+1;
+    nh[h[u] = minh+1]++;
+  }
+  return old-d;
+}
+}
+
+class Solution {
+public:
+  int guardCastle(vector<string>& grid) {
+    int n = grid[0].size(), p = 4*n, src = p+1;
+    sink = src+1;
+    fill_n(head, sink+1, -1);
+    allo = 0;
+
+    REP(i, 2) REP(j, n) {
+      int v = (2*j+i)*2;
+      if (grid[i][j] == '.')
+        insert(v, v+1, 1);
+      else if (grid[i][j] != '#')
+        insert(v, v+1, INT_MAX);
+
+      if (grid[i][j] == 'C')
+        insert(src
