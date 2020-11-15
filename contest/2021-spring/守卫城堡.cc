@@ -50,4 +50,27 @@ public:
         insert(v, v+1, INT_MAX);
 
       if (grid[i][j] == 'C')
-        insert(src
+        insert(src, v, INT_MAX);
+      else if (grid[i][j] == 'S')
+        insert(v, sink, INT_MAX);
+      else if (grid[i][j] == 'P') {
+        insert(p, v, INT_MAX);
+        insert(v+1, p, INT_MAX);
+      }
+
+      REP(d, 4) {
+        const int dx[] = {-1,0,1,0}, dy[] = {0,1,0,-1};
+        unsigned i1 = i+dx[d], j1 = j+dy[d];
+        if (i1 < 2 && j1 < n)
+          insert(v+1, (2*j1+i1)*2, INT_MAX);
+      }
+    }
+
+    int flow = 0;
+    fill_n(h, sink+1, 0);
+    fill_n(nh, sink+2, 0);
+    while (h[src] <= sink) {
+      flow += augment(src, INT_MAX, sink);
+      if (flow >= 2*n) return -1;
+    }
+  
