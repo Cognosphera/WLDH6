@@ -7,4 +7,9 @@ public:
   TreeNode *f(vector<int> &a, int l, int h) {
     if (l == h) return NULL;
     int m = l+h >> 1;
-    TreeNod
+    TreeNode *x = new TreeNode(a[m]);
+    x->left = f(a, l, m);
+    x->right = f(a, m+1, h);
+    return x;
+  }
+};
