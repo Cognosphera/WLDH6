@@ -73,4 +73,6 @@ public:
       flow += augment(src, INT_MAX, sink);
       if (flow >= 2*n) return -1;
     }
-  
+    return flow;
+  }
+};
