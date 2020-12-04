@@ -14,4 +14,9 @@ proc countPyramids(a: Arr[Arr[cint]], m: int, ns: Arr[cint]): cint {.exportc.} =
       g.fill 0
       for j in 1..n:
         if a[i][j-1] == 1:
-          g[j]
+          g[j] = min(min(f[j-1], f[j+1]), f[j]) + 1
+          result += g[j]-1
+      for j in 1..n:
+        f[j] = g[j]
+    for i in 0..<(m div 2):
+      swap a[i], a[m-1-i]
