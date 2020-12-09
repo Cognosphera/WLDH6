@@ -45,4 +45,7 @@ public:
     REP(i, n)
       FOR(j, i+1, n)
         if (a[i] > a[j])
-          res += f[j][
+          res += f[j][i] * g[i][j];
+    return res;
+  }
+};
