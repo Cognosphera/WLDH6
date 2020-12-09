@@ -8,4 +8,6 @@ public:
       if (i && j < n && (a[i]>a[i-1]) == (a[i]>a[j]))
         s++;
     }
-    retu
+    return s;
+  }
+};
