@@ -25,4 +25,24 @@ public:
 
 ///
 
-#define FOR(i, 
+#define FOR(i, a, b) for (int i = (a); i < (b); i++)
+#define REP(i, n) for (int i = 0; i < (n); i++)
+#define ROF(i, a, b) for (int i = (b); --i >= (a); )
+
+static short f[4001][4001], g[4001][4001];
+
+class Solution {
+public:
+  long long countQuadruplets(vector<int>& a) {
+    int n = a.size();
+    long long res = 0;
+    REP(i, n) {
+      REP(j, i)
+        f[i][j] = (j ? f[i][j-1] : 0) + (a[j] < a[i]);
+      ROF(j, i+1, n)
+        g[i][j] = (j+1 < n ? g[i][j+1] : 0) + (a[j] > a[i]);
+    }
+    REP(i, n)
+      FOR(j, i+1, n)
+        if (a[i] > a[j])
+          res += f[j][
