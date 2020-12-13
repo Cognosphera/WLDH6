@@ -13,4 +13,21 @@ public:
       FOR(x, x0-r, x0+r+1) {
         int s = r*r-(x-x0)*(x-x0), d = sqrt(s+1e-6);
         as[x+R].emplace_back(y0-d, 1);
-       
+        as[x+R].emplace_back(y0+d+1, -1);
+      }
+    }
+    int ret = 0;
+    for (auto &a : as) {
+      sort(ALL(a));
+      int d = 0, bgn = -R-1;
+      for (auto &x: a) {
+        if (d == 0)
+          bgn = x.first;
+        d += x.second;
+        if (d == 0)
+          ret += x.first-bgn;
+      }
+    }
+    return ret;
+  }
+};
