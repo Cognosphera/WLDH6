@@ -22,4 +22,28 @@ class Solution {
   }
 public:
   vector<int> countSmaller(vector<int>& nums) {
-    int n = nums
+    int n = nums.size();
+    a.resize(n);
+    b.resize(n);
+    c.assign(n, 0);
+    REP(i, n)
+      a[i] = pii{nums[i], i};
+    f(0, n);
+    return c;
+  }
+};
+
+// order statistics tree
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+
+typedef pair<int, int> pii;
+#define ROF(i, a, b) for (int i = (b); --i >= (a); )
+
+class Solution {
+public:
+  vector<int> countSmaller(vector<int>& nums) {
+    tree<pii, null_type, less<pii>, rb_tree_tag, tree_order_statistics_node_update> tr;
+    ROF(i, 0, nums.siz
