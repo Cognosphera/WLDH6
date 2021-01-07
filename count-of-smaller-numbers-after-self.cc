@@ -46,4 +46,10 @@ class Solution {
 public:
   vector<int> countSmaller(vector<int>& nums) {
     tree<pii, null_type, less<pii>, rb_tree_tag, tree_order_statistics_node_update> tr;
-    ROF(i, 0, nums.siz
+    ROF(i, 0, nums.size()) {
+      tr.insert(pii{nums[i], i});
+      nums[i] = tr.order_of_key(pii{nums[i], 0});
+    }
+    return nums;
+  }
+};
