@@ -17,4 +17,17 @@ public:
       v.push_back(n/i);
     ROF(i, 1, v.back())
       v.push_back(i);
-    unorde
+    unordered_map<int, int> c;
+    for (auto i: v)
+      c[i] = i-1;
+    FOR(i, 2, rt+1)
+      if (c[i-1] < c[i]) {
+        int cnt = c[i-1], i2 = i*i;
+        for (auto j: v) {
+          if (j < i2) break;
+          c[j] -= c[j/i]-cnt;
+        }
+      }
+    return c[n];
+  }
+};
