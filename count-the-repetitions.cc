@@ -28,4 +28,30 @@ out:
 ///
 
 #define FOR(i, a, b) for (remove_cv<remove_reference<decltype(b)>::type>::type i = (a); i < (b); i++)
-#define REP(i
+#define REP(i, n) FOR(i, 0, n)
+
+const int L1 = 100, N2 = 1000000;
+
+class Solution {
+public:
+  int getMaxRepetitions(string s1, int n1, string s2, int n2) {
+    int l1 = s1.size(), l2 = s2.size();
+    vector<vector<int>> a(l1, vector<int>(26, -1));
+    REP(i, l1)
+      REP(c, 26) {
+        char ok = 0;
+        FOR(j, i, l1)
+          if (s1[j]-'a' == c) {
+            ok = 1;
+            a[i][c] = j+1;
+            break;
+          }
+        if (! ok)
+          REP(j, i)
+            if (s1[j]-'a' == c) {
+              a[i][c] = j+1;
+              break;
+            }
+      }
+
+    vector<vector<pa
