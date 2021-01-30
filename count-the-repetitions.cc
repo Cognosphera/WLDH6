@@ -54,4 +54,24 @@ public:
             }
       }
 
-    vector<vector<pa
+    vector<vector<pair<int, int>>> one(31-__builtin_clz(N2-1)+2, vector<pair<int, int>>(l1));
+    REP(i, l1) {
+      int x = i, y = 0, t;
+      REP(j, l2) {
+        if (x == l1) x = 0, y++;
+        t = a[x][s2[j]-'a'];
+        if (t < 0) return 0;
+        if (t <= x) y++;
+        x = t;
+      }
+      one[0][i] = {x, y};
+    }
+    FOR(k, 1, one.size())
+      REP(i, l1) {
+        int x, y;
+        tie(x, y) = one[k-1][i];
+        if (x == l1) x = 0, y++;
+        one[k][i] = {one[k-1][x].first, min(y+one[k-1][x].second, INT_MAX/2)};
+      }
+
+    
