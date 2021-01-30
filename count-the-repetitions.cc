@@ -74,4 +74,20 @@ public:
         one[k][i] = {one[k-1][x].first, min(y+one[k-1][x].second, INT_MAX/2)};
       }
 
-    
+    vector<vector<pair<int, int>>> two(31-__builtin_clz(L1*N2-1)+2, vector<pair<int, int>>(l1));
+    REP(i, l1) {
+      int x = i, y = 0;
+      for (int k = one.size(); --k >= 0; )
+        if (n2 & 1<<k) {
+          if (x == l1) x = 0, y++;
+          y += one[k][x].second;
+          x = one[k][x].first;
+        }
+      two[0][i] = {x, y};
+    }
+    FOR(k, 1, two.size())
+      REP(i, l1) {
+        int x, y;
+        tie(x, y) = two[k-1][i];
+        if (x == l1) x = 0, y++;
+        two[k][i] = {two[k-1][x].first, min(y+two[k-1][x].seco
