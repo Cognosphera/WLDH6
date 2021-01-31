@@ -90,4 +90,18 @@ public:
         int x, y;
         tie(x, y) = two[k-1][i];
         if (x == l1) x = 0, y++;
-        two[k][i] = {two[k-1][x].first, min(y+two[k-1][x].seco
+        two[k][i] = {two[k-1][x].first, min(y+two[k-1][x].second, INT_MAX/2)};
+      }
+
+    int x = 0, y = 0, r = 0;
+    for (int k = two.size(); --k >= 0; ) {
+      if (x == l1) x = 0, y++;
+      if (y+two[k][x].second < n1) {
+        y += two[k][x].second;
+        x = two[k][x].first;
+        r += 1<<k;
+      }
+    }
+    return r;
+  }
+};
