@@ -32,4 +32,33 @@ public:
         s.push({x, true});
       while (! s.empty() && s.top().first->right == x) {
         bool f = s.top().second;
-      
+        x = s.top().first;
+        s.pop();
+        r += f;
+        if (! s.empty())
+          s.top().second &= f && s.top().first->val == x->val;
+      }
+      if (s.empty())
+        break;
+      x = s.top().first->right;
+    }
+    return r;
+  }
+};
+
+/// Morris-like post-order traversal
+
+class Solution {
+  void reverse_right_chain(TreeNode *x, TreeNode *y) {
+    TreeNode *z = x->right, *t;
+    while (x != y) {
+      t = z->right;
+      z->right = x;
+      x = z;
+      z = t;
+    }
+  }
+public:
+  int countUnivalSubtrees(TreeNode *x) {
+    TreeNode aux(0), *y, *z, *t;
+    aux.
