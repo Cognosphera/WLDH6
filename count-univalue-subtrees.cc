@@ -61,4 +61,25 @@ class Solution {
 public:
   int countUnivalSubtrees(TreeNode *x) {
     TreeNode aux(0), *y, *z, *t;
-    aux.
+    aux.left = x;
+    x = &aux;
+    int r = 0;
+    while (x) {
+      y = x->left;
+      if (y) {
+        while (y->right && y->right != x)
+          y = y->right;
+        if (y->right == x) {
+          reverse_right_chain(x->left, y);
+          t = NULL;
+          for (z = y; ; t = z, z = z->right) {
+            if (z->left && z->left->val != z->val || t && t->val != z->val)
+              z->val = INT_MIN;
+            else
+              r++;
+            if (z == x->left) break;
+          }
+          reverse_right_chain(y, x->left);
+          y->right = NULL;
+        } else {
+          y
