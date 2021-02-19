@@ -82,4 +82,13 @@ public:
           reverse_right_chain(y, x->left);
           y->right = NULL;
         } else {
-          y
+          y->right = x;
+          x = x->left;
+          continue;
+        }
+      }
+      x = x->right;
+    }
+    return r;
+  }
+};
