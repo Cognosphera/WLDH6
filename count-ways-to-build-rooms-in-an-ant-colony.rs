@@ -10,4 +10,19 @@ impl Solution {
         fac[1] = 1; invfac[1] = 1; inv[1] = 1;
         for i in 2..n {
             inv[i] = ((MOD-MOD/i)*(inv[MOD%i] as usize)%MOD) as i32;
-       
+            fac[i] = (fac[i-1] as usize*i%MOD) as i32;
+            invfac[i] = (invfac[i-1] as usize*inv[i] as usize%MOD) as i32;
+        }
+
+        let mut d = vec![0; n];
+        let mut top = std::usize::MAX;
+        for &p in prev.iter() { if p >= 0 { d[p as usize] += 1; }}
+        for i in 0..n { if d[i] == 0 { d[i] = top; top = i; }}
+
+        let mut num = vec![0; n];
+        let mut cnt = vec![1; n];
+        let mut ans = 1;
+        while top != std::usize::MAX {
+            let u = top;
+            let p = prev[u] as usize;
+            top 
