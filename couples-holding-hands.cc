@@ -12,4 +12,13 @@ public:
     };
     for (int i = 0; i < 2*n; i += 2) {
       int x = find(row[i]/2), y = find(row[i+1]/2);
-      if (x == y) co
+      if (x == y) continue;
+      uf[x] += uf[y];
+      uf[y] = x;
+    }
+    int ret = 0;
+    for (int i = 0; i < n; i++)
+      ret += uf[i] >= 0;
+    return ret;
+  }
+};
