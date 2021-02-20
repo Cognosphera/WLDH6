@@ -25,4 +25,21 @@ impl Solution {
         while top != std::usize::MAX {
             let u = top;
             let p = prev[u] as usize;
-            top 
+            top = d[top];
+            cnt[u] = cnt[u] *fac[num[u]] as usize%MOD;
+            num[u] += 1;
+            if p == std::usize::MAX {
+                ans = cnt[u];
+            } else {
+                cnt[p] = cnt[p] *cnt[u]%MOD *invfac[num[u]] as usize%MOD;
+                num[p] += num[u];
+                d[p] -= 1;
+                if d[p] == 0 {
+                    d[p] = top;
+                    top = p;
+                }
+            }
+        }
+        ans as i32
+    }
+}
