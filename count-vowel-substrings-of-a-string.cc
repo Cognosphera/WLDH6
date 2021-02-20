@@ -13,4 +13,11 @@ public:
         else if (a[j]=='e') c|=2;
         else if (a[j]=='i') c|=4;
         else if (a[j]=='o') c|=8;
-   
+        else if (a[j]=='u') c|=16;
+        else break;
+        if (c==31) ans++;
+      }
+    }
+    return ans;
+  }
+};
