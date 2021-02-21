@@ -38,4 +38,28 @@ namespace KoAluru
   template<typename T>
   void minus_to_plus(T a[], int sa[], int n, int k)
   {
-    bucket(a,
+    bucket(a, n, k, true);
+    ROF(i, 0, n) {
+      int j = sa[i]-1;
+      if (j >= 0 && t[j])
+        sa[--b[a[j]]] = j;
+    }
+  }
+
+  template<typename T>
+  void ka(const T a[], int n, int k, int sa[])
+  {
+    t[n-1] = false;
+    ROF(i, 0, n-1)
+      t[i] = a[i] < a[i+1] || a[i] == a[i+1] && t[i+1];
+    bool minor = 2 * count(t, t+n, false) > n;
+
+    bucket(a, n, k, minor);
+    fill_n(sa, n, -1);
+    if (minor) {
+      REP(i, n)
+        if (t[i])
+          sa[--b[a[i]]] = i;
+      plus_to_minus(a, sa, n, k);
+      minus_to_plus(a, sa, n, k);
+    } 
