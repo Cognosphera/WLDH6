@@ -62,4 +62,26 @@ namespace KoAluru
           sa[--b[a[i]]] = i;
       plus_to_minus(a, sa, n, k);
       minus_to_plus(a, sa, n, k);
-    } 
+    } else {
+      sa[b[a[n-1]]++] = n-1;
+      REP(i, n-1)
+        if (! t[i])
+          sa[b[a[i]]++] = i;
+      minus_to_plus(a, sa, n, k);
+      plus_to_minus(a, sa, n, k);
+    }
+
+    int last = -1, name = 0, nn = count(t, t+n, minor);
+    int *sa2, *pi;
+    if (minor)
+      sa2 = sa, pi = sa+n-nn;
+    else
+      sa2 = sa+n-nn, pi = sa;
+    fill_n(b, n, -1);
+    REP(i, n)
+      if (sa[i] >= 0 && minor == t[sa[i]]) {
+        bool diff = last == -1;
+        int p = sa[i];
+        if (! diff)
+          REP(j, n) {
+            if (last+j >= n || p+j >= n ||
