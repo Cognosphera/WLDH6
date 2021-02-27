@@ -111,4 +111,29 @@ namespace KoAluru
       t[i] = a[i] < a[i+1] || a[i] == a[i+1] && t[i+1];
 
     nn = 0;
-    bucket(a, n, 
+    bucket(a, n, k, minor);
+    if (minor) {
+      REP(i, n)
+        if (minor == t[i])
+          pi[nn++] = i;
+      REP(i, nn)
+        sa[i] = pi[sa2[i]];
+      ROF(i, 0, nn) {
+        int j = sa[i];
+        sa[i] = -1;
+        sa[--b[a[j]]] = j;
+      }
+    } else {
+      REP(i, n)
+        if (minor == t[i])
+          pi[nn++] = i;
+      ROF(i, 0, nn)
+        sa[n-nn+i] = pi[sa2[i]];
+      REP(i, nn) {
+        int j = sa[n-nn+i];
+        sa[n-nn+i] = -1;
+        sa[b[a[j]]++] = j;
+      }
+    }
+    if (minor)
+      plus_to_minus(a, sa, n, k);
