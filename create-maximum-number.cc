@@ -137,3 +137,29 @@ namespace KoAluru
     }
     if (minor)
       plus_to_minus(a, sa, n, k);
+    else
+      minus_to_plus(a, sa, n, k);
+  }
+
+  template<typename T>
+  void main(const T a[], int n, int k, int sa[], int b[])
+  {
+    if (n > 0) {
+      KoAluru::b = b;
+      t = new bool[n];
+      ka(a, n, k, sa);
+      delete[] t;
+    }
+  }
+};
+
+class Solution {
+  vector<int> maxSubseq(const vector<int> &a, int c) {
+    vector<int> r;
+    REP(i, a.size()) {
+      while (r.size()+a.size()-i > c && r.size() && r.back() < a[i])
+        r.pop_back();
+      if (r.size() < c)
+        r.push_back(a[i]);
+    }
+   
