@@ -84,4 +84,31 @@ namespace KoAluru
         int p = sa[i];
         if (! diff)
           REP(j, n) {
-            if (last+j >= n || p+j >= n ||
+            if (last+j >= n || p+j >= n || a[last+j] != a[p+j] || t[last+j] != t[p+j]) {
+              diff = true;
+              break;
+            } else if (j > 0 && (minor == t[last+j] || minor == t[p+j]))
+              break;
+          }
+        if (diff) {
+          name++;
+          last = p;
+        }
+        b[p] = name-1;
+      }
+    nn = 0;
+    REP(i, n)
+      if (b[i] >= 0)
+        pi[nn++] = b[i];
+
+    if (name < nn)
+      ka(pi, nn, name, sa2);
+    else
+      REP(i, nn)
+        sa2[pi[i]] = i;
+
+    ROF(i, 0, nn)
+      t[i] = a[i] < a[i+1] || a[i] == a[i+1] && t[i+1];
+
+    nn = 0;
+    bucket(a, n, 
