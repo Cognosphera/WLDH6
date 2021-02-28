@@ -162,4 +162,26 @@ class Solution {
       if (r.size() < c)
         r.push_back(a[i]);
     }
-   
+    return r;
+  }
+  vector<int> interleave(vector<int> a, const vector<int> &b) {
+    int m = a.size(), n = b.size(), i = 0, j = 0, k = 0;
+    vector<int> sa(m+n+1), rnk(max(m+n+1, 10+1));
+    a.resize(m+n+1);
+    REP(i, m)
+      a[i]++;
+    a[m] = 0;
+    REP(i, n)
+      a[m+1+i] = b[i]+1;
+    KoAluru::main(&a[0], m+n+1, 10+1, &sa[0], &rnk[0]);
+    REP(i, m+n+1)
+      rnk[sa[i]] = i;
+    while (i < m || j < n)
+      if (j == n || i < m && rnk[i] > rnk[m+1+j])
+        sa[k++] = a[i++]-1;
+      else
+        sa[k++] = b[j++];
+    sa.pop_back();
+    return sa;
+  }
+public:
