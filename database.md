@@ -42,3 +42,35 @@ select Email from Person group by Email having count(*) > 1;
 ```
 
 ## Consecutive Numbers
+```sql
+select distinct Num from (
+  select Num, if(Num=@last, @cnt:=@cnt+1, @cnt:=1) as cnt, @last:=Num from Logs, (select @last:=-1, @cnt:=0) _t
+) _t where cnt >= 3;
+```
+
+## Rank Scores
+```sql
+select s.Score, (select count(*)+1 from (select distinct Score from Scores) ss where Score > s.Score) rank from Scores s order by Score desc;
+```
+
+## Nth Highest Salary
+```sql
+create function getNthHighestSalary(N int) returns int
+begin
+  declare M int;
+  set M = N - 1;
+  return (
+    select distinct Salary from Employee order by Salary desc limit M, 1
+  );
+end
+```
+
+## Second Highest Salary
+```sql
+select max(Salary) from Employee where Salary < (select max(Salary) from Employee);
+```
+
+## Combine Two Tables
+```sql
+select FirstName,LastName,City,State from Person as p left join Address as a on p.PersonId=a.PersonId;
+```
