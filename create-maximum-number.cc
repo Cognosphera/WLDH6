@@ -185,3 +185,14 @@ class Solution {
     return sa;
   }
 public:
+  vector<int> maxNumber(vector<int> &a, vector<int> &b, int k) {
+    int m = a.size(), n = b.size();
+    vector<int> mx;
+    for (int i = max(k-n, 0); i <= min(k, m); i++) {
+      auto t = interleave(maxSubseq(a, i), maxSubseq(b, k-i));
+      if (lexicographical_compare(mx.begin(), mx.end(), t.begin(), t.end()))
+        mx.swap(t);
+    }
+    return mx;
+  }
+};
