@@ -16,4 +16,7 @@ impl Solution {
             }
             sum += v;
             i = k;
-  
+        }
+        ans
+    }
+}
