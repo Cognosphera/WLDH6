@@ -21,3 +21,6 @@ public:
         string(1, S[i]);
       K %= b[i];
     }
+    return string(1, S[0]);
+  }
+};
