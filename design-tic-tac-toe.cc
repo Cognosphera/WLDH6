@@ -28,4 +28,15 @@ public:
     a[row][col] = player;
     int rc = 0, cc = 0;
     for (int i = 0; i < n; i++) {
-      rc += a[row]
+      rc += a[row][i] == player;
+      cc += a[i][col] == player;
+    }
+    return rc == n || cc == n || diagonal(row, col) ? player : 0;
+  }
+};
+
+/**
+ * Your TicTacToe object will be instantiated and called as such:
+ * TicTacToe obj = new TicTacToe(n);
+ * int param_1 = obj.move(row,col,player);
+ */
