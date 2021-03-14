@@ -38,4 +38,19 @@ public:
       if (++x.first == x.second)
         h.pop_back();
       else
-        push_he
+        push_heap(h.begin(), h.end(), cmp);
+    }
+    return r;
+  }
+
+  /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
+  void follow(int followerId, int followeeId) {
+    if (followerId != followeeId)
+      follows[followerId].insert(followeeId);
+  }
+
+  /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
+  void unfollow(int followerId, int followeeId) {
+    follows[followerId].erase(followeeId);
+  }
+};
