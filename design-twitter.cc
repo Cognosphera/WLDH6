@@ -20,4 +20,22 @@ public:
     auto cmp = [](const pair<it, it>& x, const pair<it, it>& y) {
       return x.first->first < y.first->first;
     };
-    vector<pair<it, it>>
+    vector<pair<it, it>> h;
+    for (int x: follows[userId]) {
+      auto& ts = tweets[x];
+      if (ts.size())
+        h.emplace_back(ts.rbegin(), ts.rend());
+    }
+    auto& ts = tweets[userId];
+    if (ts.size())
+      h.emplace_back(ts.rbegin(), ts.rend());
+    make_heap(h.begin(), h.end(), cmp);
+    vector<int> r;
+    while (r.size() < 10 && h.size()) {
+      pop_heap(h.begin(), h.end(), cmp);
+      auto& x = h.back();
+      r.push_back(x.first->second);
+      if (++x.first == x.second)
+        h.pop_back();
+      else
+        push_he
