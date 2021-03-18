@@ -21,4 +21,18 @@ public:
     REP(i, n)
       s[i][i].push_back(nums[i]);
     ROF(i, 0, n)
-   
+      FOR(j, i+1, n)
+        FOR(k, i, j)
+          for (auto x: s[i][k])
+            for (auto y: s[k+1][j])
+              s[i][j].push_back(op(ops[k], x, y));
+    return s[0][n-1];
+  }
+  int op(char c, int x, int y) {
+    switch (c) {
+    case '+': return x+y;
+    case '-': return x-y;
+    default: return x*y;
+    }
+  }
+};
