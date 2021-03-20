@@ -8,4 +8,6 @@ public:
       int &b = bs[a[i]-'a'];
       b = exchange(s, (s*2L-(~b?b:0)+mod) % mod);
     }
-  
+    return s-1;
+  }
+};
