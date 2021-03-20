@@ -26,4 +26,10 @@ proc diffWaysToCompute(s: cstring, returnSize: ptr cint): ptr UncheckedArray[cin
           for y in s[k+1][j]:
             s[i][j].add(case ops[k]
             of '+': x+y
-            of '-': 
+            of '-': x-y
+            else: x*y)
+
+  returnSize[] = cast[cint](s[0][n-1].len)
+  result = cast[ptr UncheckedArray[cint]](malloc(cast[csize_t](cint.sizeof*returnSize[])))
+  for i in 0..<s[0][n-1].len:
+    result[i] = cast[cint](s[0][n-1][i])
