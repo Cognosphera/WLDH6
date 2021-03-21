@@ -26,4 +26,23 @@ public:
               color[v] = color[u]^3;
               q0.push_back(v);
             } else if (color[v] == color[u])
-     
+              return -1;
+        }
+        int mx = 0;
+        for (int bgn : q0) {
+          q1.assign(1, bgn);
+          d.assign(n, -1);
+          d[bgn] = 0;
+          REP(i, q1.size()) {
+            int u = q1[i];
+            for (int v : es[u])
+              if (d[v] < 0)
+                d[v] = d[u]+1, q1.push_back(v);
+          }
+          mx = max(mx, d[q1.back()]);
+        }
+        res += mx+1;
+      }
+    return res;
+  }
+};
