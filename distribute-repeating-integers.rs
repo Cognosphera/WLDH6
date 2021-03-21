@@ -20,3 +20,19 @@ impl Solution {
             let y = x & x-1;
             sum[x] = sum[y]+quantity[(x^y).trailing_zeros() as usize];
         }
+
+        let mut dp = vec![false; 1<<n];
+        dp[0] = true;
+        for &f in freq.iter().rev().take(n) {
+            for x in (1..1<<n).rev() {
+                let mut y = x-1;
+                while !dp[x] {
+                    if dp[y] && sum[x^y] <= f as i32 { dp[x] = true; }
+                    if y == 0 { break; }
+                    y = y-1 & x;
+                }
+            }
+        }
+        *dp.last().unwrap()
+    }
+}
