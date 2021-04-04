@@ -12,4 +12,6 @@ where x is the largest 2^k-1 less than i
 class Solution {
 public:
   int lastRemaining(int n) {
-    return ((0x55
+    return ((0x55555555 | n) & (1u<<31-__builtin_clz(n))-1) + 1;
+  }
+};
