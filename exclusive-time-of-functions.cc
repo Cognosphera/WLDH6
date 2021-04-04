@@ -11,4 +11,11 @@ public:
         a[b.back()] += ++t-l;
         b.pop_back();
       } else {
-        if (b.size()) a[b.bac
+        if (b.size()) a[b.back()] += t-l;
+        b.push_back(id);
+      }
+      l = t;
+    }
+    return a;
+  }
+};
