@@ -14,3 +14,18 @@ public:
         switch (s[0]) {
         case '+':
           st.push(x+y);
+          break;
+        case '-':
+          st.push(x-y);
+          break;
+        case '*':
+          st.push(x*y);
+          break;
+        case '/':
+          st.push(x/y);
+          break;
+        }
+      }
+    return st.top();
+  }
+};
