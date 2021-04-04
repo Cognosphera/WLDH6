@@ -25,4 +25,5 @@ public:
   }
   void leave(int p) {
     a.erase(find(a.begin(), a.end(), p));
-  
+  }
+};
