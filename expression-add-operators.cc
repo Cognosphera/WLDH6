@@ -41,4 +41,14 @@ class Solution {
   int n, nn, target;
   vector<multimap<ll, string>> e_plus, e_minus;
   vector<string> res;
-  void backward(int
+  void backward(int k, string s, ll add, ll mul, ll last, ll ten) {
+    if (k < nn) return;
+    int x = a[k-1]-'0';
+    ll ten2 = 10*ten, sum = add+mul*last;
+    backward(k-1, string(1, a[k-1])+s, add, mul, last+ten2*x, ten2);
+    if (ten == 1 || last >= ten) { // `last` has no leading zero
+      backward(k-1, string(1, a[k-1])+'*'+s, add, mul*last, x, 1);
+      backward(k-1, string(1, a[k-1])+'+'+s, sum, 1, x, 1);
+      backward(k-1, string(1, a[k-1])+'-'+s, add-mul*last, 1, x, 1);
+      e_plus[k].insert(make_pair(sum, s));
+      e_minus[k].insert(make_pair(add-mul*last, 
