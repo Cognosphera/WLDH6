@@ -51,4 +51,23 @@ class Solution {
       backward(k-1, string(1, a[k-1])+'+'+s, sum, 1, x, 1);
       backward(k-1, string(1, a[k-1])+'-'+s, add-mul*last, 1, x, 1);
       e_plus[k].insert(make_pair(sum, s));
-      e_minus[k].insert(make_pair(add-mul*last, 
+      e_minus[k].insert(make_pair(add-mul*last, s));
+    }
+  }
+  void forward(int k, string s, ll add, ll mul, ll last) {
+    ll sum = add+mul*last;
+    if (k == n) {
+      if (sum == target)
+        res.push_back(s);
+      return;
+    }
+    int x = a[k]-'0';
+    if (last) // no leading zero
+      forward(k+1, s+a[k], add, mul, last*10+x);
+    forward(k+1, s+'*'+a[k], add, mul*last, x);
+    if (k < nn) {
+      forward(k+1, s+'+'+a[k], sum, 1, x);
+      forward(k+1, s+'-'+a[k], sum, -1, x);
+    } else {
+      auto rg = e_plus[k].equal_range(target-sum);
+      for (auto it = rg.first; it != rg.second; +
