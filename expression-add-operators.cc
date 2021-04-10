@@ -87,4 +87,8 @@ public:
       e_plus.resize(n);
       e_minus.resize(n);
       backward(n-1, string(1, a[n-1]), 0, 1, a[n-1]-'0', 1);
-      forward(1, string(1, a[0]), 0, 1, a[
+      forward(1, string(1, a[0]), 0, 1, a[0]-'0');
+    }
+    return res;
+  }
+};
