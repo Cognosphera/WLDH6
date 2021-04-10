@@ -70,4 +70,21 @@ class Solution {
       forward(k+1, s+'-'+a[k], sum, -1, x);
     } else {
       auto rg = e_plus[k].equal_range(target-sum);
-      for (auto it = rg.first; it != rg.second; +
+      for (auto it = rg.first; it != rg.second; ++it)
+        res.push_back(s+'+'+it->second);
+      rg = e_minus[k].equal_range(target-sum);
+      for (auto it = rg.first; it != rg.second; ++it)
+        res.push_back(s+'-'+it->second);
+    }
+  }
+public:
+  vector<string> addOperators(string num, int target) {
+    a = num;
+    n = a.size();
+    if (n) {
+      nn = n/2; // 0 < nn < n
+      this->target = target;
+      e_plus.resize(n);
+      e_minus.resize(n);
+      backward(n-1, string(1, a[n-1]), 0, 1, a[n-1]-'0', 1);
+      forward(1, string(1, a[0]), 0, 1, a[
