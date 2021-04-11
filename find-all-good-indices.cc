@@ -18,3 +18,8 @@ public:
       if (min(b[i], s) >= k)
         r.push_back(i);
       if (a[i-1] >= a[i]) s++;
+      else s = 1;
+    }
+    return r;
+  }
+};
