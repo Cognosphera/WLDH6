@@ -13,4 +13,12 @@ public:
     vector<string> q(su), ret;
     unordered_set<string> vis(su.begin(), su.end());
     while (q.size()) {
-      a
+      auto x = q.back();
+      q.pop_back();
+      for (int i: e[x])
+        if (!--d[i] && vis.insert(r[i]).second)
+          q.push_back(r[i]), ret.push_back(r[i]);
+    }
+    return ret;
+  }
+};
