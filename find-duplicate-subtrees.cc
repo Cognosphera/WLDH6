@@ -31,4 +31,23 @@ public:
     pw.resize(a.size());
     long pow = 1;
     REP(i, a.size()) {
-      pw[i
+      pw[i] = pow;
+      h[i+1] = (h[i]+pow*a[i]) % P;
+      pow = pow*K % P;
+    }
+    unordered_map<long, TreeNode *> mp;
+    vector<TreeNode *> ans;
+    for (auto &range: ranges) {
+      int l, r;
+      TreeNode *x;
+      tie(x, l, r) = range;
+      long v = (h[r]-h[l]+P)*inv(pw[l]) % P;
+      auto res = mp.try_emplace(v, x);
+      if (!res.second && res.first->second) {
+        ans.push_back(x);
+        res.first->second = nullptr;
+      }
+    }
+    return ans;
+  }
+};
