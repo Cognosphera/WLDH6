@@ -14,4 +14,12 @@ public:
     while (k-- && pq.size()) {
       pii x = pq.top();
       pq.pop();
-      r.emplace_back(nums1[x.first], nums2[x.s
+      r.emplace_back(nums1[x.first], nums2[x.second]);
+      if (x.first+1 < nums1.size())
+        pq.emplace(x.first+1, x.second);
+      if (! x.first && x.second+1 < nums2.size())
+        pq.emplace(x.first, x.second+1);
+    }
+    return r;
+  }
+};
