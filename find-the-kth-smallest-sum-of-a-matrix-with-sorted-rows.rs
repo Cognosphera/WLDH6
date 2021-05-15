@@ -9,4 +9,11 @@ impl Solution {
             for x in h.iter() {
                 for y in a.iter() {
                     h1.push(x+y);
-                    if h1.len() 
+                    if h1.len() > k as usize { h1.pop(); }
+                }
+            }
+            h = h1;
+        }
+        *h.peek().unwrap()
+    }
+}
