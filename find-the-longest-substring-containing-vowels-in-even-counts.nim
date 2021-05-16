@@ -18,4 +18,6 @@ proc findTheLongestSubstring(s: cstring): int {.exportc.} =
     else: discard
     inc i
     if bgn[m] >= 0:
-      r
+      result = max(result, i-bgn[m])
+    else:
+      bgn[m] = i
