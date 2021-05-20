@@ -13,4 +13,9 @@ proc restoreMatrix(row: cintA, m: int, col: cintA, n: int, returnSize: ptr cint,
     page = cast[cintA](addr page[n])
     result[i] = resi
     var rowi = row[i]
-    returnColumnSizes[
+    returnColumnSizes[][i] = n.cint
+    for j in 0..<n:
+      let x = min(rowi, col[j])
+      resi[j] = x
+      rowi -= x
+      col[j] -= x
