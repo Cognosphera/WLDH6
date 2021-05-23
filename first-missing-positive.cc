@@ -18,4 +18,15 @@ public:
 
 class Solution {
 public:
-  int firstMissingPositive(vecto
+  int firstMissingPositive(vector<int> &a) {
+    int l = 0, h = a.size();
+    while (l < h)
+      if (a[l]-1 == l)
+        l++;
+      else if (l <= a[l]-1 && a[l]-1 < h && a[a[l]-1] != a[l])
+        swap(a[l], a[a[l]-1]);
+      else
+        a[l] = a[--h];
+    return l+1;
+  }
+};
