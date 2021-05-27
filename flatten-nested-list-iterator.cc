@@ -20,4 +20,31 @@ class NestedIterator {
   stack<pair<vector<NestedInteger>::iterator, vector<NestedInteger>::iterator>> s;
 public:
   NestedIterator(vector<NestedInteger> &nestedList) {
-    s.push({nestedList.begin()
+    s.push({nestedList.begin(), nestedList.end()});
+  }
+
+  int next() {
+    hasNext();
+    return (s.top().first++)->getInteger();
+  }
+
+  bool hasNext() {
+    while (! s.empty())
+      if (s.top().first == s.top().second) {
+        s.pop();
+        if (! s.empty())
+          ++s.top().first;
+      } else if (s.top().first->isInteger())
+        return true;
+    else {
+      auto &x = s.top().first->getList();
+      s.push({x.begin(), x.end()});
+    }
+    return false;
+  }
+};
+
+/**
+ * Your NestedIterator object will be instantiated and called as such:
+ * NestedIterator i(nestedList);
+ * while (i.hasNext())
