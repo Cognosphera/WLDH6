@@ -47,4 +47,5 @@ public:
 /**
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i(nestedList);
- * while (i.hasNext())
+ * while (i.hasNext()) cout << i.next();
+ */
