@@ -16,4 +16,9 @@ public:
         ++i;
       else {
         auto j = find(i, s.end(), '-');
-        su
+        sum ^= sg[j-i];
+        i = j;
+      }
+    return sum;
+  }
+};
