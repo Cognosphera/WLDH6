@@ -23,4 +23,6 @@ public:
         a = a*10%b;
       }
     }
- 
+    return r;
+  }
+};
