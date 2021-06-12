@@ -35,4 +35,6 @@ impl Solution {
                 return false;
             }
         }
-        tr
+        true
+    }
+}
