@@ -15,4 +15,8 @@ public:
       int x = f(e.first), y = f(e.second);
       if (x == y)
         return false;
-      djs[x]
+      djs[x] = y;
+    }
+    return true;
+  }
+};
