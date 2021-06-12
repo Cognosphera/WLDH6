@@ -18,4 +18,21 @@ impl Solution {
                 j += i;
             }
         }
-        let mut uf = (0..m).co
+        let mut uf = (0..m).collect::<Vec<_>>();
+        for &(mut x) in nums.iter() {
+            let rx = find(&mut uf, x);
+            while x > 1 {
+                let p = sieve[x as usize];
+                let rp = find(&mut uf, p);
+                uf[rp] = rx as i32;
+                x /= p;
+            }
+        }
+        let mut sorted = nums.clone();
+        sorted.sort_unstable();
+        for i in 0..nums.len() {
+            if find(&mut uf, sorted[i]) != find(&mut uf, nums[i]) {
+                return false;
+            }
+        }
+        tr
