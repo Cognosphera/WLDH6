@@ -32,4 +32,5 @@ public:
       f();
     }
     return r;
-  
+  }
+};
