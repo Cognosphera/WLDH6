@@ -18,4 +18,6 @@ public:
       ans = tot-a[k];
     if (b[k^1] < 10001)
       ans = max(ans, tot-a[k^1]-b[k^1]);
-    return 
+    return ans;
+  }
+};
