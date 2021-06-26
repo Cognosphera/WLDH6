@@ -9,4 +9,9 @@ public:
     for (int x: houses) {
       while (it != heaters.end() && *it < x) ++it;
       int t = it != heaters.end() ? *it-x : INT_MAX;
-      if (it != heaters.begin()) t = min(t, x-it[-1])
+      if (it != heaters.begin()) t = min(t, x-it[-1]);
+      r = max(r, t);
+    }
+    return r;
+  }
+};
