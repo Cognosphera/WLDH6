@@ -15,4 +15,6 @@ public:
         a[i][j] = min(q.front().first, a[i][k]+k+1);
       }
     }
-    return a[1
+    return a[1][n];
+  }
+};
