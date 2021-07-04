@@ -12,4 +12,9 @@ public:
         r.push_back(y);
       else {
         r.back().start = min(x.start, y.start);
-        r.back().end = max(x.end, y.
+        r.back().end = max(x.end, y.end);
+      }
+    }
+    return r;
+  }
+};
