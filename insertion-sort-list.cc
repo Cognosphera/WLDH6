@@ -18,3 +18,7 @@ public:
           r = &(*r)->next;
         q->next = *r;
         *r = q;
+      }
+      return head;
+    }
+};
