@@ -29,4 +29,14 @@ public:
             if (r == q) break;
           }
           q->left = NULL;
-        } els
+        } else {
+          q->right = p;
+          p = p->left;
+          continue;
+        }
+      }
+      p = p->right;
+    }
+    return aux.left;
+  }
+};
