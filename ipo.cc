@@ -9,4 +9,14 @@ public:
     REP(i, Profits.size())
       a.emplace_back(Capital[i], Profits[i]);
     sort(a.begin(), a.end());
- 
+    multiset<int> b;
+    for (int i = 0; k--; ) {
+      for (; i < a.size() && a[i].first <= W; i++)
+        b.insert(a[i].second);
+      if (b.empty()) break;
+      W += *b.rbegin();
+      b.erase(prev(b.end()));
+    }
+    return W;
+  }
+};
