@@ -23,4 +23,12 @@ public:
     sort(ALL(b), [&](pii x, pii y) {
       if (x.second != y.second)
         return x.second < y.second;
-      return lexicographical
+      return lexicographical_compare(&a[x.first], &a[x.first]+x.second, &a[y.first], &a[y.first]+y.second);
+    });
+    return unique(ALL(b), [&](pii x, pii y) {
+      if (x.second != y.second)
+        return false;
+      return equal(&a[x.first], &a[x.first]+x.second, &a[y.first], &a[y.first]+y.second);
+    }) - b.begin();
+  }
+};
