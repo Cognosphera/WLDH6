@@ -32,4 +32,9 @@ public:
     int n = A.size();
     c.assign(36, 0);
     memo[c] = 0;
-    REP(i,
+    REP(i, n)
+      if (A[i] != B[i])
+        c[(A[i]-'a')*T+B[i]-'a']++;
+    return f();
+  }
+};
