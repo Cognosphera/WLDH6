@@ -9,4 +9,27 @@ class Solution {
   int f() {
     auto it = memo.find(c);
     if (it != memo.end())
- 
+      return it->second;
+    int r = 20;
+    REP(i, T)
+      REP(j, T)
+        if (c[i*T+j]) {
+          c[i*T+j]--;
+          REP(k, T)
+            if (j != k && c[j*T+k]) {
+              c[j*T+k]--;
+              if (i != k) c[i*T+k]++;
+              r = min(r, f()+1);
+              if (i != k) c[i*T+k]--;
+              c[j*T+k]++;
+            }
+          c[i*T+j]++;
+          return memo[c] = r;
+        }
+  }
+public:
+  int kSimilarity(string A, string B) {
+    int n = A.size();
+    c.assign(36, 0);
+    memo[c] = 0;
+    REP(i,
