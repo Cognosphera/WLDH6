@@ -13,4 +13,11 @@ impl Solution {
             }
             let t = a[p]; a[p] = a[hi-1]; a[hi-1] = t;
             if k < p { nth(a, lo, p, k); }
-     
+            else if k > p { nth(a, p+1, hi, k); }
+        }
+        let n = nums.len();
+        let k = n-k as usize;
+        nth(&mut nums[..], 0, n, k);
+        nums[k]
+    }
+}
