@@ -34,4 +34,6 @@ proc kthSmallestProduct(a: ptr UncheckedArray[cint], n: int, b: ptr UncheckedArr
     b0.swap b1
   while l < h:
     let mid = (l+h) shr 1
-   
+    if count(a0, b0, mid)+count(a1, b1, mid) < k: l = mid+1
+    else: h = mid
+  l*sign
