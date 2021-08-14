@@ -12,4 +12,17 @@ class Solution {
          rvalid = postorder(x->right, rmn, rmx, rs);
     if (lvalid && rvalid && lmx < x->val && x->val < rmn) {
       mn = ls ? lmn : x->val;
-      mx = rs ? rm
+      mx = rs ? rmx : x->val;
+      size = ls+1+rs;
+      return true;
+    }
+    size = max(ls, rs);
+    return false;
+  }
+public:
+  int largestBSTSubtree(TreeNode* root) {
+    long mn, mx, size;
+    postorder(root, mn, mx, size);
+    return size;
+  }
+};
