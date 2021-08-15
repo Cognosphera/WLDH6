@@ -34,3 +34,10 @@ public:
             top = v;
           }
         }
+        ans = max(ans, c[u]);
+      }
+      if (cnt < n) return -1;
+    }
+    return ans;
+  }
+};
