@@ -24,4 +24,16 @@ impl Solution {
             let mut x = x;
             while x > 1 {
                 let p = sieve[x as usize];
-                let rp = find(&mut uf,
+                let rp = find(&mut uf, p);
+                uf[rp] = rx as i32;
+                x /= p;
+            }
+        }
+        let mut size = vec![0; m as usize];
+        for &x in nums.iter() {
+            let rx = find(&mut uf, x);
+            size[rx] += 1;
+        }
+        *size.iter().max().unwrap() as i32
+    }
+}
