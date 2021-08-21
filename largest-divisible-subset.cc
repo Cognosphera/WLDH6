@@ -48,3 +48,5 @@ public:
     for (; dp.count(x); x = dp[x].second)
       r.push_back(x);
     return r;
+  }
+};
