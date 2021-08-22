@@ -13,4 +13,15 @@ public:
       for (; i < m+n; i++) {
         int d = (i < m ? x[i] : y[i-m]) - (i < n ? y[i] : x[i-n]);
         if (d > 0) return true;
-        if (d
+        if (d < 0) return false;
+      }
+      return false;
+    });
+    if (b[0] == "0")
+      return "0";
+    string r;
+    for (auto &x: b)
+      r += x;
+    return r;
+  }
+};
