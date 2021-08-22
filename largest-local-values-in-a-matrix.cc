@@ -15,4 +15,7 @@ public:
         REP(k, 8)
           x = max(x, a[i+dx[k]][j+dy[k]]);
         b[i-1][j-1] = x;
-    
+      }
+    return b;
+  }
+};
