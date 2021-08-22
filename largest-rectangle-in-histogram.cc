@@ -10,4 +10,10 @@ public:
       while (! st.empty() && (i == h.size() || h[st.top()] > h[i])) {
         int x = st.top();
         st.pop();
-        r = max(r, (i-(st.empty()?0:st.top()+1))*h[x]
+        r = max(r, (i-(st.empty()?0:st.top()+1))*h[x]);
+      }
+      st.push(i);
+    }
+    return r;
+  }
+};
