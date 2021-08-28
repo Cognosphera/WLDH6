@@ -5,4 +5,11 @@ public:
     const char *s = a.c_str();
     int l = 0;
     while (*s) {
-      if (*
+      if (*s++ != ' ')
+        l++;
+      else if (*s && *s != ' ')
+        l = 0;
+    }
+    return l;
+  }
+};
