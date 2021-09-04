@@ -13,4 +13,14 @@ public:
         c[j] += a[i][j] == 'B';
       }
     REP(j, n)
-    
+      REP(i, m)
+        if (a[i][j] == 'B' && r[i] == k && c[j] == k) {
+          REP(ii, m)
+            if (a[ii][j] == 'B' && a[ii] != a[i]) goto out;
+          s += k;
+out:
+          break;
+        }
+    return s;
+  }
+};
