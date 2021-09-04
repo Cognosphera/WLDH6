@@ -10,4 +10,12 @@ public:
         dot |= input[j] == '.';
       int t = 0;
       for (; input[i] == '\t'; i++)
-     
+        t++;
+      st.resize(t);
+      st.push_back((st.empty() ? 0 : st.back()+1)+j-i);
+      if (dot)
+        r = max(r, st.back());
+    }
+    return r;
+  }
+};
