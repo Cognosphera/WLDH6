@@ -27,4 +27,16 @@ impl Solution {
             for i in 0..n { h[r[sa[i] as usize] as usize] = i as i32;}
             for i in (0..n).rev() { if sa[i] >= k as i32 {
                 let v = &mut h[r[sa[i] as usize-k] as usize]; x[*v as usize] = sa[i]-k as i32; *v -= 1; }}
-          
+            for i in n-k..n { x[h[r[i] as usize] as usize] = i as i32; }
+            sa[0..n].clone_from_slice(&x[0..n]);
+            h[sa[0] as usize] = 0;
+            for i in 1..n { h[sa[i] as usize] = h[sa[i-1] as usize] +
+                if r[sa[i] as usize]!=r[sa[i-1] as usize] || sa[i].max(sa[i-1]) as usize >= n-k ||
+                    r[sa[i] as usize+k]!=r[sa[i-1] as usize+k] {1} else {0}; }
+            r[0..n].clone_from_slice(&h[0..n]);
+            k *= 2;
+        }
+        k = 0;
+        h[0] = 0;
+        for i in 0..n {
+            if r
