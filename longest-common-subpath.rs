@@ -39,4 +39,22 @@ impl Solution {
         k = 0;
         h[0] = 0;
         for i in 0..n {
-            if r
+            if r[i] > 0 {
+                let j = sa[r[i] as usize-1] as usize;
+                while i.max(j)+k < n && a[i+k] == a[j+k] { k += 1; }
+                h[r[i] as usize] = k as i32;
+            }
+            if k > 0 { k -= 1; }
+        }
+
+        for i in 0..np { r[i] = 0; }
+        let mut ans = 0;
+        let mut cnt = 0;
+        let mut j = 0;
+        let mut hd = 0;
+        let mut tl = 0;
+        for i in 0..n-np {
+            let v = &mut r[pos[sa[i] as usize] as usize];
+            if *v == 0 { cnt += 1; }
+            *v += 1;
+            while hd < tl && h
