@@ -41,4 +41,15 @@ public:
         h[r[i]] = k;
         k && k--;
       }
-    int ans = -
+    int ans = -1, ansx;
+    REP(i, n)
+      if (h[i] > ans)
+        ans = h[ansx = i];
+    string ret = S.substr(sa[ansx], ans);
+    delete[] sa;
+    delete[] r;
+    delete[] h;
+    delete[] x;
+    return ret;
+  }
+};
