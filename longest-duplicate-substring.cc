@@ -21,4 +21,24 @@ public:
       REP(i, n) if (sa[i] >= k) x[j++] = sa[i]-k;
       fill_n(h, m, 0);
       REP(i, n) h[r[x[i]]]++;
-      FOR(i, 1, m) h[i] += h
+      FOR(i, 1, m) h[i] += h[i-1];
+      ROF(i, 0, n) sa[--h[r[x[i]]]] = x[i];
+      fill_n(h, m, 0);
+      m = 1;
+      h[sa[0]] = 0;
+      FOR(i, 1, n) {
+        if (r[sa[i]] != r[sa[i-1]] || max(sa[i], sa[i-1]) >= n-k || r[sa[i]+k] != r[sa[i-1]+k]) m++;
+        h[sa[i]] = m-1;
+      }
+      copy_n(h, n, r);
+      if (m == n) break;
+    }
+    k = 0;
+    h[0] = 0;
+    REP(i, n)
+      if (r[i]) {
+        for (int j = sa[r[i]-1]; max(i, j)+k < n && a[i+k] == a[j+k]; k++);
+        h[r[i]] = k;
+        k && k--;
+      }
+    int ans = -
