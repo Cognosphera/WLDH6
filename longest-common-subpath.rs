@@ -57,4 +57,19 @@ impl Solution {
             let v = &mut r[pos[sa[i] as usize] as usize];
             if *v == 0 { cnt += 1; }
             *v += 1;
-            while hd < tl && h
+            while hd < tl && h[x[tl-1] as usize] > h[i] { tl -= 1; }
+            x[tl] = i as i32;
+            tl += 1;
+            if cnt < np { continue; }
+            while cnt == np {
+                let v = &mut r[pos[sa[j] as usize] as usize];
+                *v -= 1;
+                if *v == 0 { cnt -= 1; }
+                if x[hd] == j as i32 { hd += 1; }
+                j += 1;
+            }
+            ans = ans.max(h[x[hd] as usize]);
+        }
+        ans
+    }
+}
