@@ -19,4 +19,6 @@ impl Solution {
             l2 = l1;
             l1 = x;
         }
-        String::from_utf8_lossy(&ans)
+        String::from_utf8_lossy(&ans).into_owned()
+    }
+}
