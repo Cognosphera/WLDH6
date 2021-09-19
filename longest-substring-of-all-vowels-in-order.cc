@@ -26,4 +26,22 @@ public:
         i++;
       else {
         int j = i; while (++i < n && a[i] == 'a');
- 
+        if (a[i] != 'e') continue; while (++i < n && a[i] == 'e');
+        if (a[i] != 'i') continue; while (++i < n && a[i] == 'i');
+        if (a[i] != 'o') continue; while (++i < n && a[i] == 'o');
+        if (a[i] != 'u') continue; while (++i < n && a[i] == 'u');
+        ans = max(ans, i-j);
+      }
+    return ans;
+  }
+};
+
+///
+
+#define FOR(i, a, b) for (remove_cv<remove_reference<decltype(b)>::type>::type i = (a); i < (b); i++)
+#define REP(i, n) FOR(i, 0, n)
+
+class Solution {
+public:
+  int longestBeautifulSubstring(string word) {
+    int n 
