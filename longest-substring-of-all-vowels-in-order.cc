@@ -44,4 +44,24 @@ public:
 class Solution {
 public:
   int longestBeautifulSubstring(string word) {
-    int n 
+    int n = word.size(), y = -1;
+    vector<int> b(n);
+    REP(i, n) {
+      if (i && word[i] == word[i-1])
+        b[i] = y;
+      else
+        b[i] = y = i-1;
+    }
+    int ans = 0;
+    REP(i, n)
+      if (word[i] == 'u') {
+        int j = b[i]; if (j < 0 || word[j] != 'o') continue;
+        j = b[j]; if (j < 0 || word[j] != 'i') continue;
+        j = b[j]; if (j < 0 || word[j] != 'e') continue;
+        j = b[j]; if (j < 0 || word[j] != 'a') continue;
+        ans = max(ans, i-b[j]);
+      }
+    return ans;
+  }
+};
+
