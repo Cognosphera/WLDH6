@@ -37,3 +37,13 @@ public:
       for (int i = nn; i < nn+n; i += 2) mconcat(i, 1);
       ROF(i, 2, nn) mconcat(i, 1 << __builtin_clz(i)-__builtin_clz(nn));
     }
+    REP(i, modc.size()) {
+      s[modi[i]] = modc[i];
+      int x = nn+modi[i];
+      for (int k = 1; x > 1; x >>= 1, k <<= 1)
+        mconcat(x, k);
+      ret[i] = seg[1].mc;
+    }
+    return ret;
+  }
+};
