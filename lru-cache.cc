@@ -23,4 +23,15 @@ public:
       a.begin()->second = value;
     } else {
       if (s.size() >= c) {
-        s.
+        s.erase(a.rbegin()->first);
+        a.pop_back();
+      }
+      a.push_front(make_pair(key, value));
+      s[key] = a.begin();
+    }
+  }
+private:
+  map<int, list<pair<int, int> >::iterator> s;
+  list<pair<int, int> > a;
+  int c;
+};
