@@ -43,4 +43,11 @@ public:
           if (j) cs[2] = f(i*n+j);
           if (j+1 < n) cs[3] = f(i*n+j+2);
           sort(cs, cs+4);
-          int k = unique(cs, cs
+          int k = unique(cs, cs+4) - cs, t = 1;
+          while (k--) t -= uf[cs[k]];
+          r = max(r, t);
+        }
+      }
+    return r;
+  }
+};
