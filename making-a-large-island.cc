@@ -22,4 +22,25 @@ public:
             uf[x]--;
           } else
             x = -1;
-          uf[i*n+j+1] 
+          uf[i*n+j+1] = x;
+          if (i && g[i-1][j]) {
+            x = f(i*n+j+1);
+            y = f((i-1)*n+j+1);
+            if (x != y) {
+              uf[y] += uf[x];
+              uf[x] = y;
+            }
+          }
+        }
+    int r = 0;
+    REP(i, m)
+      REP(j, n) {
+        r = max(r, -uf[i*n+j+1]);
+        if (!g[i][j]) {
+          int cs[4] = {};
+          if (i) cs[0] = f((i-1)*n+j+1);
+          if (i+1 < m) cs[1] = f((i+1)*n+j+1);
+          if (j) cs[2] = f(i*n+j);
+          if (j+1 < n) cs[3] = f(i*n+j+2);
+          sort(cs, cs+4);
+          int k = unique(cs, cs
