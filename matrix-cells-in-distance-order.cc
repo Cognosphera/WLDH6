@@ -17,3 +17,7 @@ public:
           y = c0+i-j; if (y < c) a.push_back({x, y});
           y = c0-i+j; if (j < i && y < c) a.push_back({x, y});
         }
+      }
+    return a;
+  }
+};
