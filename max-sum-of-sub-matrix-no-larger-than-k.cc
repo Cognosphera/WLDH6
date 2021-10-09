@@ -25,4 +25,10 @@ public:
           auto it = s.lower_bound(sum-k);
           if (it != s.end())
             r = max(r, sum-*it);
-   
+          s.insert(sum);
+        }
+      }
+    }
+    return r;
+  }
+};
