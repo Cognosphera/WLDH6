@@ -39,4 +39,26 @@ public:
 
 #define ROF(i, a, b) for (int i = (b); --i >= (a); )
 #define FOR(i, a, b) for (int i = (a); i < (b); i++)
-#define REP(i, n) f
+#define REP(i, n) for (int i = 0; i < (n); i++)
+
+class Solution {
+public:
+  int maximalRectangle(vector<vector<char> > &a) {
+    if (a.empty()) return 0;
+    int m = a.size(), n = a[0].size(), ans = 0;
+    vector<int> h(n), l(n), r(n, n-1);
+    REP(i, m) {
+      REP(j, n) {
+        h[j] = a[i][j] == '1' ? h[j]+1 : 0;
+        l[j] = j;
+        while (l[j] && h[l[j]-1] >= h[j])
+          l[j] = l[l[j]-1];
+      }
+      ROF(j, 0, n) {
+        r[j] = j;
+        while (r[j]+1 < n && h[j] <= h[r[j]+1])
+          r[j] = r[r[j]+1];
+        ans = max(ans, (r[j]-l[j]+1)*h[j]);
+      }
+    }
+  
