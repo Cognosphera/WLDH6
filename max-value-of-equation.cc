@@ -15,4 +15,8 @@ public:
         ans = max(ans, x+y+q[0].second);
       while (q.size() && q.back().second < y-x)
         q.pop_back();
-      q.e
+      q.emplace_back(x, y-x);
+    }
+    return ans;
+  }
+};
