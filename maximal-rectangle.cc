@@ -12,4 +12,31 @@ public:
     int m = a.size(), n = a[0].size(), ans = 0;
     vector<int> h(n, 0), l(n, 0), r(n, n-1);
     REP(i, m) {
-      
+      int ll = 0, rr = n-1;
+      REP(j, n)
+        if (a[i][j] == '1')
+          l[j] = max(l[j], ll);
+        else {
+          l[j] = 0;
+          ll = j+1;
+        }
+      ROF(j, 0, n)
+        if (a[i][j] == '1') {
+          h[j]++;
+          r[j] = min(r[j], rr);
+          ans = max(ans, (r[j]-l[j]+1)*h[j]);
+        } else {
+          h[j] = 0;
+          r[j] = n-1;
+          rr = j-1;
+        }
+    }
+    return ans;
+  }
+};
+
+// 潘宇超 2008
+
+#define ROF(i, a, b) for (int i = (b); --i >= (a); )
+#define FOR(i, a, b) for (int i = (a); i < (b); i++)
+#define REP(i, n) f
