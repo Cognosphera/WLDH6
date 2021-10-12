@@ -82,4 +82,29 @@ public:
       REP(j, n)
         h[j] = a[i][j] == '1' ? h[j]+1 : 0;
       fill(b.begin(), b.end(), 0);
-      RE
+      REP(j, n)
+        b[h[j]]++;
+      REP1(j, m)
+        b[j] += b[j-1];
+      REP(j, n)
+        s[--b[h[j]]] = j;
+      fill(p.begin(), p.end(), -1);
+      ROF(j, 0, n) {
+        int x = s[j], l = x, r = x;
+        p[x] = x;
+        if (x && p[x-1] != -1) {
+          l = p[x-1];
+          p[l] = x;
+          p[x] = l;
+        }
+        if (x+1 < n && p[x+1] != -1) {
+          l = p[x];
+          r = p[x+1];
+          p[l] = r;
+          p[r] = l;
+        }
+        ans = max(ans, (r-l+1)*h[x]);
+      }
+    }
+    return ans;
+  }
