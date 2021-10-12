@@ -61,4 +61,25 @@ public:
         ans = max(ans, (r[j]-l[j]+1)*h[j]);
       }
     }
-  
+    return ans;
+  }
+};
+
+// ACRush某TopCoder SRM
+
+#define ROF(i, a, b) for (int i = (b); --i >= (a); )
+#define FOR(i, a, b) for (int i = (a); i < (b); i++)
+#define REP(i, n) for (int i = 0; i < (n); i++)
+#define REP1(i, n) for (int i = 1; i <= (n); i++)
+
+class Solution {
+public:
+  int maximalRectangle(vector<vector<char> > &a) {
+    if (a.empty()) return 0;
+    int m = a.size(), n = a[0].size(), ans = 0;
+    vector<int> h(n), p(n), b(m+1), s(n);
+    REP(i, m) {
+      REP(j, n)
+        h[j] = a[i][j] == '1' ? h[j]+1 : 0;
+      fill(b.begin(), b.end(), 0);
+      RE
