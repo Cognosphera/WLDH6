@@ -108,3 +108,29 @@ public:
     }
     return ans;
   }
+};
+
+// stack
+
+#define REP(i, n) for (int i = 0; i < (n); i++)
+
+class Solution {
+public:
+  int maximalRectangle(vector<vector<char> > &a) {
+    if (a.empty()) return 0;
+    int m = a.size(), n = a[0].size(), ans = 0;
+    vector<int> h(n);
+    REP(i, m) {
+      stack<int> st;
+      REP(j, n) {
+        h[j] = a[i][j] == '1' ? h[j]+1 : 0;
+        while (! st.empty() && h[st.top()] > h[j]) {
+          int x = st.top();
+          st.pop();
+          ans = max(ans, (j-1-(st.empty()?-1:st.top()))*h[x]);
+        }
+        st.push(j);
+      }
+      while (! st.empty()) {
+        int x = st.top();
+       
