@@ -133,4 +133,10 @@ public:
       }
       while (! st.empty()) {
         int x = st.top();
-       
+        st.pop();
+        ans = max(ans, (n-1-(st.empty()?-1:st.top()))*h[x]);
+      }
+    }
+    return ans;
+  }
+};
