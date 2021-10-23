@@ -4,4 +4,21 @@
 
 class Solution {
 public:
-  int longestPalindrome(string a,
+  int longestPalindrome(string a, string b) {
+    string c = a+b;
+    int n = c.size(), na = a.size(), ans = 0;
+    vector<vector<int>> s(n, vector<int>(n));
+    ROF(i, 0, n) {
+      s[i][i] = 1;
+      FOR(j, i+1, n) {
+        if (c[i] == c[j]) {
+          s[i][j] = s[i+1][j-1]+2;
+          if (i < na && na <= j)
+            ans = max(ans, s[i][j]);
+        } else
+          s[i][j] = max(s[i+1][j], s[i][j-1]);
+      }
+    }
+    return ans;
+  }
+};
