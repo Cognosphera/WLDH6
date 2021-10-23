@@ -12,4 +12,8 @@ public:
         it = min_element(A.begin(), it);
         auto it1 = min_element(it, A.end());
         (it == A.begin() || it1 != A.end() && *it1 < *it ? *it1 : *it) *= -1;
-      
+      }
+    }
+    return accumulate(A.begin(), A.end(), 0);
+  }
+};
