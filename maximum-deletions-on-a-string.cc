@@ -13,4 +13,11 @@ public:
       FOR(j, i+1, mx) {
         if (dp[j] < dp[i]) continue;
         int k = 0;
-        fo
+        for (; i+k < j && a[i+k] == a[j+k]; k++);
+        if (i+k == j)
+          dp[i] = dp[j]+1;
+      }
+    }
+    return dp[0];
+  }
+};
