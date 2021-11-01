@@ -7,4 +7,7 @@ public:
       if (x > mn)
         ans = max(ans, x-mn);
       mn = min(mn, x);
-   
+    }
+    return ans;
+  }
+};
