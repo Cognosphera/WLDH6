@@ -14,4 +14,7 @@ proc maxTaxiEarnings(n: int, rides: ptr UncheckedArray[cintA], m: int, u: pointe
   for i in 1..n:
     var t = dp[i-1]
     while j < m and a[j][1] == i:
-      t = t.max dp[a[j][0
+      t = t.max dp[a[j][0]]+a[j][2]
+      inc j
+    dp[i] = t
+  dp[n]
