@@ -26,4 +26,16 @@ proc maximumInvitations(fa: cintA, n: int): int {.exportc.} =
       vis[v] = true
   var sum = 0
   for i in 0..<n:
-    if vis[i]
+    if vis[i]: continue
+    var c = 0
+    var j = i
+    while true:
+      c += 1
+      vis[j] = true
+      j = fa[j]
+      if j == i: break
+    if c == 2:
+      sum += dp[i]+dp[fa[i]]
+    else:
+      result = max(result, c)
+  max(result, sum)
