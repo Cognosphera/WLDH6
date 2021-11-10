@@ -13,4 +13,20 @@ public:
     int cost = 0;
     for (auto &r: reqs) {
       es.push_back({r[1], 1, -1, head[r[0]]});
-      head[r
+      head[r[0]] = es.size()-1;
+      es.push_back({r[0], 0, 1, head[r[1]]});
+      head[r[1]] = es.size()-1;
+    }
+    for(;;) {
+      fill(d.begin(), d.end(), 0);
+      fill(pred.begin(), pred.end(), -1);
+      REP(k, n-1)
+        REP(u, n)
+          for (int i = head[u]; ~i; i = es[i].next)
+            if (es[i].c > 0 && d[u]+es[i].w < d[es[i].v])
+              d[es[i].v] = d[u]+es[i].w, pred[es[i].v] = i;
+      int p = -1;
+      REP(u, n)
+        for (int i = head[u]; ~i; i = es[i].next)
+          if (es[i].c > 0 && d[u]+es[i].w < d[es[i].v]) {
+    
