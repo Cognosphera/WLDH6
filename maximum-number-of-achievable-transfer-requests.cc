@@ -29,4 +29,16 @@ public:
       REP(u, n)
         for (int i = head[u]; ~i; i = es[i].next)
           if (es[i].c > 0 && d[u]+es[i].w < d[es[i].v]) {
-    
+            pred[p = es[i].v] = i;
+            break;
+          }
+      if (p < 0) break;
+      fill(vis.begin(), vis.end(), 0);
+      while (vis[p] = 1, p = es[pred[p]^1].v, !vis[p]);
+      int r = p;
+      do cost += es[pred[p]].w, es[pred[p]].c--, es[pred[p]^1].c++, p = es[pred[p]^1].v;
+      while (p != r);
+    }
+    return -cost;
+  }
+};
