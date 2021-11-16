@@ -67,4 +67,17 @@ public:
         r0[i] = min(r0[2*f-i], g-i);
       else {
         f = i;
-        g = max(g,
+        g = max(g, i);
+        for (; g < n && 2*f-1 >= g && s[2*f-1-g] == s[g]; g++);
+        r0[i] = g-f;
+      }
+    for (int i = 0; i < n; i++) {
+      f[i+1] = f[i];
+      if (r1[i] >= l1)
+        f[i+l1] = max(f[i+l1], f[i-l1+1]+1);
+      if (r0[i] >= l0)
+        f[i+l0] = max(f[i+l0], f[i-l0]+1);
+    }
+    return f[n];
+  }
+};
