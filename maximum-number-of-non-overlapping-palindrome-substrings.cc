@@ -46,4 +46,25 @@ public:
   }
 };
 
-/// Manacher's algorithm (wit
+/// Manacher's algorithm (with even lengths)
+
+class Solution {
+public:
+  int maxPalindromes(string s, int k) {
+    int n = s.size(), l1 = k/2+1, l0 = (k+1)/2;
+    vector f(n+1, 0), r1(n, 0), r0(n, 0);
+    for (int f, g = 0, i = 0; i < n; i++)
+      if (i < g && r1[2*f-i] != g-i)
+        r1[i] = min(r1[2*f-i], g-i);
+      else {
+        f = i;
+        g = max(g, i);
+        for (; g < n && 2*f >= g && s[2*f-g] == s[g]; g++);
+        r1[i] = g-f;
+      }
+    for (int f, g = 0, i = 0; i < n; i++)
+      if (i < g && r0[2*f-i] != g-i)
+        r0[i] = min(r0[2*f-i], g-i);
+      else {
+        f = i;
+        g = max(g,
