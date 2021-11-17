@@ -18,4 +18,11 @@ proc waysToPartition(nums: ptr UncheckedArray[cint], n: int, k: int): cint {.exp
   for i in 0..<n:
     let a = cast[int](nums[i])
     if a != k:
-      let s
+      let s1 = s+k-a
+      if s1 mod 2 == 0:
+        ans = ans.max(left.getOrDefault(s1 div 2, 0) + right.getOrDefault(s1 div 2+a-k, 0))
+    prefix += a
+    inc left.mgetOrPut(prefix, 0)
+    dec right[prefix]
+
+  return cast[cint](ans)
