@@ -20,4 +20,9 @@ impl Solution {
             if j == p.len() {
                 l = m;
             } else {
-   
+                h = m-1;
+            }
+        }
+        l as i32
+    }
+}
