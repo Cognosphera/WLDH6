@@ -27,4 +27,9 @@ impl Solution {
             right[i] = right[i+1].max(2*(p-i)+1);
         }
         let mut ans = 0;
-        for i i
+        for i in 0..n-1 {
+            ans = ans.max(left[i] as i64*right[i+1] as i64);
+        }
+        ans
+    }
+}
