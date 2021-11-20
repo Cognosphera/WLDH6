@@ -13,3 +13,6 @@ impl Solution {
             h.push(Reverse(s));
             ans = ans.max(e as i64 * sum)
         }
+        (ans % 1000000007) as i32
+    }
+}
