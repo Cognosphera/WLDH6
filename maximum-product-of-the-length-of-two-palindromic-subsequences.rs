@@ -11,4 +11,13 @@ impl Solution {
             if a.iter().eq(a.iter().rev()) { dp[i] = a.len(); }
         }
         let mut ans = 0;
-        for i in 1.
+        for i in 1..m {
+            let mut j = i;
+            while j > 0 {
+                ans = ans.max(dp[m-1-i] * dp[j]);
+                j = j-1 & i;
+            }
+        }
+        ans as i32
+    }
+}
