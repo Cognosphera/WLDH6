@@ -18,4 +18,15 @@ public:
         if (m>>i&1)
           REP(j, 26)
             g[j] += use[i][j];
-      int s
+      int s = 0;
+      REP(j, 26)
+        if (g[j] > cnt[j])
+          goto nxt;
+      REP(j, 26)
+        s += score[j] * g[j];
+      ans = max(ans, s);
+nxt:;
+    }
+    return ans;
+  }
+};
