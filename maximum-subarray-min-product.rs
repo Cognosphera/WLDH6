@@ -27,4 +27,15 @@ impl Solution {
     pub fn max_sum_min_product(a: Vec<i32>) -> i32 {
         use std::{iter,usize::MAX};
         let sum: Box<[i64]> = iter::once(0).chain(a.iter().scan(0, |s,&y| { *s += y as i64; Some(*s) })).collect();
-        
+        let mut b: Vec<(usize,i32)> = a.into_iter().enumerate().collect();
+        b.sort_unstable_by_key(|v| std::cmp::Reverse(v.1));
+        let mut c: Vec<usize> = vec![MAX; b.len()];
+        (b.iter().fold(0, |acc,&(i,v)| {
+            let l = if i>0 && c[i-1]!=MAX { c[i-1] } else { i };
+            let r = if i+1<b.len() && c[i+1]!=MAX { c[i+1] } else { i };
+            c[l] = r;
+            c[r] = l;
+            acc.max((sum[r+1]-sum[l]) * v as i64)
+        }) % 1000000007) as i32
+    }
+}
