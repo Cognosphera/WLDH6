@@ -8,4 +8,11 @@ public:
       s[i+1] = s[i]+A[i];
     for (int _ = 2; _--; swap(L, M)) {
       int m = 0;
-     
+      for (int i = L+M; i <= n; i++) {
+        m = max(m, s[i-M]-s[i-M-L]);
+        r = max(r, s[i]-s[i-M]+m);
+      }
+    }
+    return r;
+  }
+};
