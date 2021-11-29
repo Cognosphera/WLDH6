@@ -12,4 +12,11 @@ public:
       REP(i, n)
         if (a[i]-x >= mi)
           x = a[i], c++;
-      if (c 
+      if (c >= k)
+        lo = mi;
+      else
+        hi = mi-1;
+    }
+    return lo;
+  }
+};
