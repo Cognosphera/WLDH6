@@ -26,4 +26,12 @@ public:
         int &b = best[j];
         if (b == -1)
           b = i-1;
-        if
+        if (~b && ((queries[j][0]^nums[b]) & k) == 0 && ~p1[b])
+          b = p1[b];
+      }
+    }
+    REP(j, m)
+      ans[queries[j][2]] = ~best[j] ? queries[j][0] ^ nums[best[j]] : -1;
+    return ans;
+  }
+};
