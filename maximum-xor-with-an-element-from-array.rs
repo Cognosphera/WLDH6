@@ -5,4 +5,14 @@ impl Solution {
         let n = nums.len();
         nums.sort_unstable();
         for (i, q) in queries.iter_mut().enumerate() { q.push(i as i32); }
-        queries.sort_unstable_by_key(|q| q[1])
+        queries.sort_unstable_by_key(|q| q[1]);
+        let mut ans = Vec::with_capacity(queries.len()); unsafe { ans.set_len(queries.len()); }
+        let mut best = vec![MAX; queries.len()];
+        let mut p0: Vec<usize> = (0..n).map(|i| i.wrapping_sub(1)).collect();
+        let mut p1 = Vec::with_capacity(n); unsafe { p1.set_len(n); }
+        for kk in (0..30).rev() {
+            let k = 1 << kk;
+            for i in 0..n {
+                if p0[i] == MAX { p1[i] = MAX; }
+                else if ((nums[i]^nums[p0[i]]) & k) == 0 { p1[i] = p1[p0[i]]; }
+                else { p1[i] = p0[i]; 
