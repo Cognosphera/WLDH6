@@ -15,4 +15,18 @@ impl Solution {
             for i in 0..n {
                 if p0[i] == MAX { p1[i] = MAX; }
                 else if ((nums[i]^nums[p0[i]]) & k) == 0 { p1[i] = p1[p0[i]]; }
-                else { p1[i] = p0[i]; 
+                else { p1[i] = p0[i]; p0[i] = p1[p0[i]]; }
+            }
+            let mut i = 0;
+            for (q, b) in queries.iter().zip(&mut best) {
+                while i < n && nums[i] <= q[1] { i += 1; }
+                if *b == MAX { *b = i.wrapping_sub(1); }
+                if *b != MAX && ((q[0]^nums[*b]) & k) == 0 && p1[*b] != MAX { *b = p1[*b]; }
+            }
+        }
+        for (q, b) in queries.iter().zip(best) {
+            ans[q[2] as usize] = if b == MAX { -1 } else { q[0]^nums[b] };
+        }
+        ans
+    }
+}
