@@ -12,4 +12,6 @@ public:
         x.start = min(x.start, i.start);
         x.end = max(x.end, i.end);
       }
-    retur
+    return r;
+  }
+};
