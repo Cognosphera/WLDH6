@@ -20,4 +20,6 @@ public:
         pq.push(x);
       cur = &((*cur)->next);
     }
-    
+    return head;
+  }
+};
