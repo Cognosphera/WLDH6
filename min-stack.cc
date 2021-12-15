@@ -47,4 +47,12 @@ public:
       b.pop();
   }
   int top() {
-    return b.top() & (1u <
+    return b.top() & (1u << (s-1)%32) ? d : d+a.top();
+  }
+  int getMin() {
+    return d;
+  }
+private:
+  stack<unsigned> a, b;
+  unsigned s, d;
+};
