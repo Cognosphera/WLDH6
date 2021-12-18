@@ -22,4 +22,17 @@ public:
             int v = es[ei].v;
             if (link[v] == -1)
               link[v] = last, st.push_back(last = v);
-   
+          }
+          if (st.empty()) break;
+          u = st.back();
+          st.pop_back();
+        }
+        for (u = last; u >= 0; u = link[u]) {
+          auto it = dst.find(source[u]);
+          if (it != dst.end())
+            dst.erase(it), ret--;
+        }
+      }
+    return ret;
+  }
+};
