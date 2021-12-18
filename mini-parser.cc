@@ -13,4 +13,14 @@ public:
         l = i+1;
       } else if (s[i] == ',' || s[i] == ']') {
         if (l < i)
-          st.top().add(NestedInteger(stoi(s.substr(l
+          st.top().add(NestedInteger(stoi(s.substr(l, i-l))));
+        l = i+1;
+        if (s[i] == ']' && st.size() > 1) {
+          auto x = st.top();
+          st.pop();
+          st.top().add(x);
+        }
+      }
+    return st.top();
+  }
+};
