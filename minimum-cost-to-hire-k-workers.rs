@@ -14,4 +14,18 @@ impl PartialOrd for Ratio {
 }
 impl PartialEq for Ratio {
     fn eq(&self, o: &Self) -> bool {
-   
+        self.cmp(o) == Ordering::Equal
+    }
+}
+impl Eq for Ratio {}
+
+impl Solution {
+    pub fn mincost_to_hire_workers(quality: Vec<i32>, wage: Vec<i32>, k: i32) -> f64 {
+        use std::collections::BinaryHeap;
+        let k = k as usize;
+        let n = quality.len();
+        let mut a = (0..n).map(|i| Ratio{num: wage[i] as i64, den: quality[i] as i64}).collect::<Vec<Ratio>>();
+        a.sort_unstable();
+        let mut h = a[0..k].iter().map(|x| x.den).collect::<BinaryHeap<i64>>();
+        let mut sum: i64 = h.iter().sum();
+    
