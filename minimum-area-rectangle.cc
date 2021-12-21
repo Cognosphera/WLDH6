@@ -16,4 +16,6 @@ public:
         }
       }
     }
-    return r == mx
+    return r == mx ? 0 : r;
+  }
+};
