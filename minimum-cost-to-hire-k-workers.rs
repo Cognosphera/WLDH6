@@ -28,4 +28,13 @@ impl Solution {
         a.sort_unstable();
         let mut h = a[0..k].iter().map(|x| x.den).collect::<BinaryHeap<i64>>();
         let mut sum: i64 = h.iter().sum();
-    
+        let mut ans = Ratio{num: sum*a[k-1].num, den: a[k-1].den};
+        for i in k..a.len() {
+            sum += a[i].den;
+            h.push(a[i].den);
+            sum -= h.pop().unwrap();
+            ans = ans.min(Ratio{num: sum*a[i].num, den: a[i].den});
+        }
+        ans.num as f64 / ans.den as f64
+    }
+}
