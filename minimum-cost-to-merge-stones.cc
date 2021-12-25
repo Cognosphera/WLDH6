@@ -8,4 +8,24 @@ public:
   int mergeStones(vector<int>& a, int K) {
     int n = a.size();
     if ((n-1)%(K-1)) return -1;
-    vector<int> sum(n+1
+    vector<int> sum(n+1);
+    REP(i, n)
+      sum[i+1] = sum[i] + a[i];
+    vector<vector<int>> s(n, vector<int>(n));
+    ROF(i, 0, n)
+      FOR(j, i+1, n) {
+        int t = INT_MAX;
+        FOR(g, i+1, j+1)
+          if (1+(g-i-1)%(K-1) + 1+(j-g)%(K-1) <= K)
+            t = min(t, s[i][g-1]+s[g][j]);
+        s[i][j] = t + ((j-i)%(K-1) ? 0 : sum[j+1]-sum[i]);
+      }
+    return s[0][n-1];
+  }
+};
+
+/// O(N^2)
+
+#define FOR(i, a, b) for (remove_cv<remove_reference<decltype(b)>::type>::type i = (a); i < (b); i++)
+#define REP(i, n) FOR(i, 0, n)
+#def
