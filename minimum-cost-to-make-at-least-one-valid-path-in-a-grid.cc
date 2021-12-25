@@ -21,4 +21,11 @@ public:
     while (d[m-1][n-1] == -1) {
       ret++;
       for (int x, y, rear = q.size(); fore != rear; ) {
-        tie(x, y) = q
+        tie(x, y) = q[fore++];
+        REP(i, 4)
+          flood(x+dir[i][0], y+dir[i][1]);
+      }
+    }
+    return d[m-1][n-1];
+  }
+};
