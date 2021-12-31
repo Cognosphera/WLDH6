@@ -45,4 +45,11 @@ public:
           u[i][j] = i;
         else {
           int t = INT_MAX, tt, l = u[i][j-K], h = min(u[i+K][j], j-1);
-          for (int g = l; g <= h;
+          for (int g = l; g <= h; g += K)
+            if ((tt = s[i][g] + s[g+1][j]) < t)
+              t = tt, u[i][j] = g;
+          s[i][j] = t + ((j-i)%K ? 0 : sum[j+1] - sum[i]);
+        }
+    return s[0][n-1];
+  }
+};
