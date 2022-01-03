@@ -18,4 +18,10 @@ impl Solution {
             if c == n-1 { return fee; }
             for &e in g[c].iter() {
                 if t+e.1 < dist[e.0 as usize] {
-                    h.push(Reverse((f
+                    h.push(Reverse((fee+passing_fees[e.0 as usize], e.0, t+e.1)));
+                }
+            }
+        }
+        -1
+    }
+}
