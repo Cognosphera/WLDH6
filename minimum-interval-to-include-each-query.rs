@@ -11,4 +11,22 @@ impl Solution {
         queries.sort_unstable_by_key(|x| x.1);
         let mut ans = vec![-1; queries.len()];
         for (qi, q) in queries {
-      
+            while i < intervals.len() && intervals[i][0] <= q {
+                h.push(Reverse((intervals[i][1]-intervals[i][0]+1, intervals[i][1])));
+                i += 1;
+            }
+            while let Some(Reverse(top)) = h.peek() {
+                if top.1 >= q { break; }
+                h.pop();
+            }
+            if let Some(Reverse(top)) = h.peek() {
+                ans[qi] = top.0;
+            }
+        }
+        ans
+    }
+}
+
+/// segment tree with range modification but no query
+impl Solution {
+    pub fn min_interval(intervals: Vec<
