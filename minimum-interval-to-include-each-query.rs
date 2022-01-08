@@ -44,4 +44,21 @@ impl Solution {
 
         let mut seg = vec![i32::MAX; 2*n];
         for itv in intervals.iter() {
-            let mut l = deflate(it
+            let mut l = deflate(itv[0]) + n-1;
+            let mut r = deflate(itv[1]+1) + n;
+            while (l ^ r) != 1 {
+                if l%2 == 0 { seg[l^1] = seg[l^1].min(itv[1]-itv[0]+1); }
+                if r%2 != 0 { seg[r^1] = seg[r^1].min(itv[1]-itv[0]+1); }
+                l /= 2;
+                r /= 2;
+            }
+        }
+        for i in 2..2*n {
+            seg[i] = seg[i].min(seg[i/2]);
+        }
+
+        queries.into_iter().map(|q| {
+            let i = deflate(q+1)-1;
+            if i == usize::MAX || seg[n+i] == i32::MAX { -1 } else { seg[n+i] }
+        }).collect()
+    }
