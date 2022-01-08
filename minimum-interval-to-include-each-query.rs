@@ -29,4 +29,19 @@ impl Solution {
 
 /// segment tree with range modification but no query
 impl Solution {
-    pub fn min_interval(intervals: Vec<
+    pub fn min_interval(intervals: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
+        use std::{i32,usize};
+        let mut sorted = vec![];
+        for itv in intervals.iter() {
+            sorted.push(itv[0]);
+            sorted.push(itv[1]+1);
+        }
+        sorted.sort_unstable();
+        sorted.dedup();
+        let n = sorted.len();
+        // partition_point is stable since 1.52.0
+        let deflate = |key| -> usize { sorted.binary_search(&key).unwrap_or_else(|i| i) };
+
+        let mut seg = vec![i32::MAX; 2*n];
+        for itv in intervals.iter() {
+            let mut l = deflate(it
