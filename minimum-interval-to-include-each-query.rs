@@ -62,3 +62,19 @@ impl Solution {
             if i == usize::MAX || seg[n+i] == i32::MAX { -1 } else { seg[n+i] }
         }).collect()
     }
+}
+
+/// union-find set
+impl Solution {
+    pub fn min_interval(mut intervals: Vec<Vec<i32>>, queries: Vec<i32>) -> Vec<i32> {
+        use std::{i32,usize};
+        let mut sorted = vec![];
+        for itv in intervals.iter() {
+            sorted.push(itv[0]);
+            sorted.push(itv[1]+1);
+        }
+        sorted.sort_unstable();
+        sorted.dedup();
+        let n = sorted.len();
+        // partition_point is stable since 1.52.0
+        let deflate = |key| -> usize { sorted.binary_search(&key).unwrap_or_else(|i| i) 
