@@ -77,4 +77,21 @@ impl Solution {
         sorted.dedup();
         let n = sorted.len();
         // partition_point is stable since 1.52.0
-        let deflate = |key| -> usize { sorted.binary_search(&key).unwrap_or_else(|i| i) 
+        let deflate = |key| -> usize { sorted.binary_search(&key).unwrap_or_else(|i| i) };
+
+        let mut uf: Vec<usize> = (0..n).collect();
+        let mut len: Vec<i32> = vec![-1; n];
+        fn find(uf: &mut Vec<usize>, mut x: usize) -> usize {
+            while uf[x] != x {
+                uf[x] = uf[uf[x]];
+                x = uf[x];
+            }
+            x
+        };
+        intervals.sort_unstable_by_key(|itv| itv[1]-itv[0]);
+        for itv in intervals.iter() {
+            let mut l = deflate(itv[0]);
+            let r = deflate(itv[1]+1);
+            loop {
+                l = find(&mut uf, l);
+                
