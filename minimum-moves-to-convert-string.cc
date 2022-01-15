@@ -8,3 +8,11 @@ public:
     REP(i, n)
       if (s[i] == 'X') {
         int j = min((int)i+2, n-1);
+        s[j] = 'O';
+        if (j) s[j-1] = 'O';
+        if (j > 1) s[j-2] = 'O';
+        ans++;
+      }
+    return ans;
+  }
+};
