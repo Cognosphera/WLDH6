@@ -94,4 +94,15 @@ impl Solution {
             let r = deflate(itv[1]+1);
             loop {
                 l = find(&mut uf, l);
-                
+                if l >= r { break; }
+                len[l] = itv[1]-itv[0]+1;
+                uf[l] = l+1;
+            }
+        }
+
+        queries.into_iter().map(|q| {
+            let i = deflate(q+1)-1;
+            if i == usize::MAX { -1 } else { len[i] }
+        }).collect()
+    }
+}
