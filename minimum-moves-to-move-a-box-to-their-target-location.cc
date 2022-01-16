@@ -21,4 +21,18 @@ public:
     memset(vis, 0, sizeof vis);
     deque<state> q;
     q.push_back({src, box});
-    vis[src.first][src.second][box
+    vis[src.first][src.second][box.first] = 1 << box.second;
+    int d = 0, e = 1;
+    while (q.size()) {
+      state c = q.front();
+      q.pop_front();
+      if (e) e--;
+      else e = q.size(), d++;
+      for (auto dir: dirs) {
+        unsigned x = c.first.first+dir[0], y = c.first.second+dir[1];
+        if (x >= n || y >= m || grid[x][y] == '#') continue;
+        state s;
+        int cost = 0;
+        if (pii(x, y) == c.second) {
+          unsigned xx = x+dir[0], yy = y+dir[1];
+          if (xx >= n || yy >= m || grid[xx][yy] == '#') co
