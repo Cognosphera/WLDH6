@@ -35,4 +35,20 @@ public:
         int cost = 0;
         if (pii(x, y) == c.second) {
           unsigned xx = x+dir[0], yy = y+dir[1];
-          if (xx >= n || yy >= m || grid[xx][yy] == '#') co
+          if (xx >= n || yy >= m || grid[xx][yy] == '#') continue;
+          if (pii(xx, yy) == tar) return d+1;
+          s = {{x, y}, {xx, yy}};
+          cost = 1;
+        } else
+          s = {{x, y}, c.second};
+        int &v = vis[x][y][s.second.first];
+        if (!(v & 1 << s.second.second)) {
+          v |= 1 << s.second.second;
+          if (cost) q.push_back(s);
+          else e++, q.push_front(s);
+        }
+      }
+    }
+    return -1;
+  }
+};
