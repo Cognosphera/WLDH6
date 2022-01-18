@@ -6,4 +6,11 @@ public:
     sort(points.begin(), points.end(), [](const pair<int, int>& x, const pair<int, int>& y) {
       return x.second < y.second;
     });
-  
+    for (int i = 0; i < points.size(); ) {
+      r++;
+      int t = points[i].second;
+      while (++i < points.size() && points[i].first <= t);
+    }
+    return r;
+  }
+};
