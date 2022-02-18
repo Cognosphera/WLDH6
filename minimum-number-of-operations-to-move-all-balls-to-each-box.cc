@@ -9,4 +9,11 @@ public:
       g[i] = g[i+1]+(b[i]-'0');
     }
     for (int i = 0; i < n; i++) {
-      f[i] = f[i+1]-g[i+1]*i + g
+      f[i] = f[i+1]-g[i+1]*i + gg*i-ff;
+      ff += i*(b[i]-'0');
+      gg += b[i]-'0';
+    }
+    f.pop_back();
+    return f;
+  }
+};
