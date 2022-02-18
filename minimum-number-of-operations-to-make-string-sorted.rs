@@ -22,4 +22,13 @@ impl Solution {
         let mut ans = 0;
         for i in (0..n).rev() {
             let ch = (s.as_bytes()[i]-b'a') as usize;
-            let mut c = cnt[0..ch].iter().sum::<usize>() as i64 * fac[n-1-i] as i64 % MOD
+            let mut c = cnt[0..ch].iter().sum::<usize>() as i64 * fac[n-1-i] as i64 % MOD;
+            cnt[ch] += 1;
+            for j in 0..26 {
+                c = c * invfac[cnt[j]] as i64 % MOD;
+            }
+            ans = (ans+c)%MOD;
+        }
+        ans as i32
+    }
+}
