@@ -8,4 +8,20 @@ proc minRemoveToMakeValid(s: cstring): cstring {.exportc.} =
     r = newSeq[int]()
     res = $s
     n = 0
-  for i i
+  for i in 0..<res.len:
+    if s[i] == '(':
+      l.add i
+    elif s[i] == ')':
+      if l.len > 0:
+        discard l.pop
+      else:
+        r.add i
+  for i in l: res[i] = '.'
+  for i in r: res[i] = '.'
+  for i in 0..<res.len:
+    if res[i] != '.':
+      res[n] = res[i]
+      n += 1
+  res.setLen n
+  result = cast[cstring](malloc((n+1).csize_t))
+  copyMem result, res.cstring, n+1
