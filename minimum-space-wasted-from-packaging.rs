@@ -38,3 +38,18 @@ impl Solution {
             let mut sum = 0;
             for &b in bs.iter() {
                 let mut l = last; let mut h = ps.len(); let mut k = 1;
+                while l+k < h {
+                    if ps[l+k] <= b { l += k+1; }
+                    else { h = l+k; }
+                    k <<= 1;
+                }
+                // let i = ps[l..h].partition_point(|&x| x <= b) + l;
+                let i = ps[l..h].binary_search_by(|&x| if x <= b { Less } else { Greater }).unwrap_or_else(|i| i) + l;
+                sum += b as i64*(i-last) as i64 - s[i]+s[last];
+                last = i;
+                if i == ps.len() { ans = ans.min(sum); break; }
+            }
+        }
+        if ans == i64::MAX { -1 } else { (ans % 1000000007) as i32 }
+    }
+}
