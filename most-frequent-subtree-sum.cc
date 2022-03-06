@@ -9,4 +9,16 @@ class Solution {
     return s;
   }
 public:
-  vector<int> findFrequ
+  vector<int> findFrequentTreeSum(TreeNode* root) {
+    vector<int> r;
+    f(root);
+    int y = 0;
+    for (auto& i: c)
+      if (i.second > y)
+        y = i.second;
+    for (auto& i: c)
+      if (i.second == y)
+        r.push_back(i.first);
+    return r;
+  }
+};
