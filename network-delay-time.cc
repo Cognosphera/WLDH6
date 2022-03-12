@@ -30,3 +30,5 @@ public:
       }
     }
     return num == n ? *max_element(dist, dist+n) : -1;
+  }
+};
