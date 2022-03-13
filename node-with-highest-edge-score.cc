@@ -9,4 +9,6 @@ public:
     vector<long> s(n);
     REP(i, n)
       s[e[i]] += i;
-    return max_ele
+    return max_element(ALL(s)) - s.begin();
+  }
+};
