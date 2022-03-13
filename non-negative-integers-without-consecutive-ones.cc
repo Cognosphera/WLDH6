@@ -14,4 +14,12 @@ public:
     FOR(i, 2, n)
       b[i] = b[i-2]+b[i-1];
     ROF(i, 0, n) {
-   
+      if (a[i]) {
+        s += b[i];
+        if (i+1 < n && a[i+1]) break;
+      }
+      if (! i) s++;
+    }
+    return s;
+  }
+};
