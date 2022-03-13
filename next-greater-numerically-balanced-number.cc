@@ -18,3 +18,17 @@ public:
         if (a[i] < 9) {
           c[++a[i]]++;
           i++;
+          break;
+        }
+        c[a[i] = 0]++;
+      }
+
+      int j = 0;
+      for (; j < 10; j++)
+        if (c[j] && c[j]!=j)
+          break;
+      if (j == 10)
+        return n;
+    }
+  }
+};
