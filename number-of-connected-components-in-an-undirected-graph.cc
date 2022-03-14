@@ -36,3 +36,21 @@ public:
     vector<bool> vis(n, false);
     vector<vector<int>> es(n);
     int comp = 0;
+    for (auto &e: edges) {
+      es[e.first].push_back(e.second);
+      es[e.second].push_back(e.first);
+    }
+    function<void(int)> dfs = [&](int u) {
+      vis[u] = true;
+      for (int v: es[u])
+        if (! vis[v])
+          dfs(v);
+    };
+    REP(i, n)
+      if (! vis[i]) {
+        comp++;
+        dfs(i);
+      }
+    return comp;
+  }
+};
