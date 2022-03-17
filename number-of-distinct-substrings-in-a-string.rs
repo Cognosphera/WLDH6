@@ -31,4 +31,12 @@ impl Solution {
         h[0] = 0;
         for i in 0..n {
             if r[i] > 0 {
-                let j = sa[r[i] as usize-1] as usi
+                let j = sa[r[i] as usize-1] as usize;
+                while i.max(j)+k < n && a[i+k] == a[j+k] { k += 1; }
+                h[r[i] as usize] = k as i32;
+            }
+            if k > 0 { k -= 1; }
+        }
+        h[0..n].iter().fold((n*(n+1)/2) as i32, |acc,v| acc-v)
+    }
+}
