@@ -10,4 +10,20 @@ class Solution {
   }
   int getSum(int x) {
     int s = 0;
-    for (; x
+    for (; x; x &= x-1)
+      s += fenwick[x-1];
+    return s;
+  }
+public:
+  vector<int> countRectangles(vector<vector<int>>& rects, vector<vector<int>>& points) {
+    int n = points.size(), m = rects.size();
+    vector<int> ret(n);
+    REP(i, n)
+      points[i].push_back(i);
+    sort(ALL(rects), greater<>());
+    sort(ALL(points), greater<>());
+    fenwick.assign(101, 0);
+    for (int j = 0, i = 0; i < n; i++) {
+      for (; j < m && points[i][0] <= rects[j][0]; j++)
+        add(101, rects[j][1]);
+      ret[points[i][
