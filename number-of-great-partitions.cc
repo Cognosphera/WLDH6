@@ -13,3 +13,9 @@ public:
       ret = ret*2%P;
       ROF(j, x, k)
         s[j] = (s[j]+s[j-x]) % P;
+    }
+    REP(i, k)
+      ret = (ret - (sum-i < k ? s[i] : 2*s[i])) % P;
+    return (ret+P) % P;
+  }
+};
