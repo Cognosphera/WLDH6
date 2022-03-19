@@ -26,4 +26,8 @@ public:
     for (int j = 0, i = 0; i < n; i++) {
       for (; j < m && points[i][0] <= rects[j][0]; j++)
         add(101, rects[j][1]);
-      ret[points[i][
+      ret[points[i][2]] = j - getSum(points[i][1]);
+    }
+    return ret;
+  }
+};
