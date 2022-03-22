@@ -32,4 +32,8 @@ public:
           }
         }
       }
-  
+      ret.push_back(cnt);
+    }
+    return ret;
+  }
+};
