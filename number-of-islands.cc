@@ -17,4 +17,18 @@ public:
           s.push(make_pair(i, j));
           a[i][j] = 'x';
           while (! s.empty()) {
- 
+            int x = s.top().first, y = s.top().second;
+            s.pop();
+            REP(d, 4) {
+              int xx = x+(int[]){-1,0,1,0}[d],
+                  yy = y+(int[]){0,1,0,-1}[d];
+              if (size_t(xx) < m && size_t(yy) < n && a[xx][yy] == '1') {
+                s.push(make_pair(xx, yy));
+                a[xx][yy] = 'x';
+              }
+            }
+          }
+        }
+    return num;
+  }
+};
