@@ -18,4 +18,16 @@ public:
           fill_n(d[i], n, -1);
         d[sx][sy] = 0;
         q[0] = make_pair(sx, sy);
-        for (int l = 0, h = 1; l < h && d[tx][ty] <
+        for (int l = 0, h = 1; l < h && d[tx][ty] < 0; l++) {
+          tie(x, y) = q[l];
+          if (x && g[x-1][y] && d[x-1][y] < 0) d[x-1][y] = d[x][y]+1, q[h++] = {x-1, y};
+          if (x+1 < m && g[x+1][y] && d[x+1][y] < 0) d[x+1][y] = d[x][y]+1, q[h++] = {x+1, y};
+          if (y && g[x][y-1] && d[x][y-1] < 0) d[x][y-1] = d[x][y]+1, q[h++] = {x, y-1};
+          if (y+1 < n && g[x][y+1] && d[x][y+1] < 0) d[x][y+1] = d[x][y]+1, q[h++] = {x, y+1};
+        }
+        if (d[tx][ty] < 0) return -1;
+        g[tx][ty] = 1;
+        r += d[tx][ty];
+        sx = tx, sy = ty;
+      }
+      ret
