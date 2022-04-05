@@ -30,4 +30,6 @@ public:
         r += d[tx][ty];
         sx = tx, sy = ty;
       }
-      ret
+      return r;
+    }
+};
