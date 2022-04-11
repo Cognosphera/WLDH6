@@ -33,4 +33,10 @@ public:
     }
     int ans = 0;
     REP(j, n)
-      ans += accumulate(ALL(
+      ans += accumulate(ALL(p[j]), 0);
+    unordered_map<int, int> c;
+    for (int v : A)
+      ans /= ++c[v];
+    return ans;
+  }
+};
