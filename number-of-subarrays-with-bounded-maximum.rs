@@ -10,4 +10,11 @@ impl Solution {
                 bgn = i+1;
             } else {
                 if x >= left {
-                    cnt = i+1-
+                    cnt = i+1-bgn;
+                }
+                ans += cnt;
+            }
+        }
+        ans as i32
+    }
+}
