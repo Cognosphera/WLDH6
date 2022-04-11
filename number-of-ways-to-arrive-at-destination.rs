@@ -7,4 +7,20 @@ impl Solution {
         for road in roads.into_iter() {
             let u = road[0] as usize;
             let v = road[1] as usize;
-            d[u][v] = 
+            d[u][v] = road[2] as i64;
+            d[v][u] = road[2] as i64;
+            c[u][v] = 1;
+            c[v][u] = 1;
+        }
+        for k in 0..n {
+            for i in 0..n {
+                for j in 0..n {
+                    let d1 = d[i][k]+d[k][j];
+                    if d1 < d[i][j] { d[i][j] = d1; c[i][j] = 0; }
+                    if d1 == d[i][j] { c[i][j] = (c[i][j]+c[i][k]*c[k][j]) % 1000000007; }
+                }
+            }
+        }
+        c[0][n-1] as i32
+    }
+}
