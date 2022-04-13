@@ -3,4 +3,21 @@
 #define ROF(i, a, b) for (remove_cv<remove_reference<decltype(b)>::type>::type i = (b); --i >= (a); )
 typedef complex<double> cd;
 
-const long MOD = 1000000007, 
+const long MOD = 1000000007, SQ = 100000, NN = 1024;
+const double IROOT = sqrt(double(MOD-SQ*SQ%MOD));
+cd units[NN], aa[NN], bb[NN];
+
+void fft_prepare(long n) {
+  double ph = 2*M_PI/n;
+  REP(i, n)
+    units[i] = {cos(ph*i), sin(ph*i)};
+}
+
+void fft_dif2(cd a[], long n) { // sign = -1
+  for (long m = n, dwi = 1; m >= 2; m >>= 1, dwi <<= 1)
+    for (long r = 0; r < n; r += m) {
+      cd *x = a+r, *y = a+r+(m>>1), *w = units;
+      REP(j, m>>1) {
+        cd v = *y, t = *x-v;
+        *y++ = {t.real()*w->real()+t.imag()*w->imag(), t.imag()*w->real()-t.real()*w->imag()};
+     
