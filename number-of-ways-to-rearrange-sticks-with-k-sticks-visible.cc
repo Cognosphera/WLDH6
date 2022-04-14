@@ -43,4 +43,28 @@ void ifft_dit2(cd a[], long n) { // sign = 1
 
 void fft_interleave(const vector<int>& a, long n, cd r[]) {
   REP(i, a.size()) {
-    lon
+    long z = a[i] <= MOD/2 ? a[i] : a[i]-MOD;
+    r[i] = cd(z%SQ, z/SQ*IROOT);
+  }
+  fill(r+a.size(), r+n, 0);
+  fft_dif2(&r[0], n);
+}
+
+vector<int> ifft_interleave(cd a[], long n) {
+  ifft_dit2(a, n);
+  vector<int> r(n);
+  REP(i, n) {
+    long x = round(a[i].real()), y = long(round(a[i].imag()/IROOT));
+    r[i] = (x+y%MOD*SQ)%MOD;
+    if (r[i] < 0) r[i] += MOD;
+  }
+  return r;
+}
+
+vector<int> rising_factorial(long l, long h) {
+  if (h-l <= 64-1) {
+    vector<int> r(h-l+1);
+    r[0] = 1;
+    FOR(i, l, h) {
+      ROF(j, 0, i-l+1)
+        r
