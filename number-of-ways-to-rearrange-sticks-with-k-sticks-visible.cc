@@ -67,4 +67,24 @@ vector<int> rising_factorial(long l, long h) {
     r[0] = 1;
     FOR(i, l, h) {
       ROF(j, 0, i-l+1)
-        r
+        r[j+1] = (r[j+1]*i+r[j])%MOD;
+      r[0] = r[0]*i%MOD;
+    }
+    return r;
+  }
+  long m = l+h >> 1;
+  auto a = rising_factorial(l, m), b = rising_factorial(m, h);
+  long n = 1 << 63-__builtin_clzl(h-l)+1;
+  fft_prepare(n);
+  fft_interleave(a, n, aa);
+  fft_interleave(b, n, bb);
+  REP(i, n) aa[i] *= bb[i];
+  return ifft_interleave(aa, n);
+}
+
+class Solution {
+public:
+  int rearrangeSticks(int n, int k) {
+    return rising_factorial(0, n)[k];
+  }
+};
