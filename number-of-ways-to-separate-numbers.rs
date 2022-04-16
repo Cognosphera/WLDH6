@@ -15,4 +15,15 @@ impl Solution {
             for i in 1..=n {
                 g[i] = f[i];
                 if l <= i && a[i-l] != b'0' {
- 
+                    if i >= 2*l && (p[i-l] >= l || a[i-l+p[i-l]] > a[i-l-l+p[i-l]]) {
+                        g[i] = (g[i]+g[i-l]) % MOD;
+                    } else {
+                        g[i] = (g[i]+f[i-l]) % MOD;
+                    }
+                }
+            }
+            std::mem::swap(&mut f, &mut g);
+        }
+        f[n]
+    }
+}
