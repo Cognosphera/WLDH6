@@ -10,3 +10,15 @@ public:
     for(;;) {
       int n = N%10;
       s = 0;
+      for (int d: ds)
+        if (d < n)
+          s += c;
+        else if (d == n)
+          s += ss;
+      ss = s;
+      if (!(N /= 10)) break;
+      r += c *= ds.size();
+    }
+    return s+r;
+  }
+};
