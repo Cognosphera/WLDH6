@@ -9,4 +9,17 @@ public:
       return {};
     int m = matrix.size(), n = matrix[0].size();
     queue<pair<int, int>> q;
-    vector<vector<char>> a(m, vector<char>(n,
+    vector<vector<char>> a(m, vector<char>(n, 0));
+    auto bfs = [&](int b) {
+      while (q.size()) {
+        int x, y;
+        tie(x, y) = q.front();
+        q.pop();
+        if (x && ! (a[x-1][y] & b) && matrix[x][y] <= matrix[x-1][y])
+          a[x-1][y] |= b, q.emplace(x-1, y);
+        if (x+1 < m && ! (a[x+1][y] & b) && matrix[x][y] <= matrix[x+1][y])
+          a[x+1][y] |= b, q.emplace(x+1, y);
+        if (y && ! (a[x][y-1] & b) && matrix[x][y] <= matrix[x][y-1])
+          a[x][y-1] |= b, q.emplace(x, y-1);
+        if (y+1 < n && ! (a[x][y+1] & b) && matrix[x][y] <= matrix[x][y+1])
+          a[x][y+1] |= b, q.emplace(
