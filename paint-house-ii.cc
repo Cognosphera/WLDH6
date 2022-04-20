@@ -16,4 +16,8 @@ public:
           swap(w, ww);
       }
       REP(j, k)
-  
+        costs[i][j] += w == costs[i-1][j] ? ww : w;
+    }
+    return *min_element(costs[n-1].begin(), costs[n-1].end());
+  }
+};
