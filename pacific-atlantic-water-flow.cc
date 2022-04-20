@@ -22,4 +22,32 @@ public:
         if (y && ! (a[x][y-1] & b) && matrix[x][y] <= matrix[x][y-1])
           a[x][y-1] |= b, q.emplace(x, y-1);
         if (y+1 < n && ! (a[x][y+1] & b) && matrix[x][y] <= matrix[x][y+1])
-          a[x][y+1] |= b, q.emplace(
+          a[x][y+1] |= b, q.emplace(x, y+1);
+      }
+    };
+    REP(i, m) {
+      q.emplace(i, 0);
+      a[i][0] = 1;
+    }
+    FOR(i, 1, n) {
+      q.emplace(0, i);
+      a[0][i] = 1;
+    }
+    bfs(1);
+    REP(i, m) {
+      q.emplace(i, n-1);
+      a[i][n-1] |= 2;
+    }
+    REP(i, n-1) {
+      q.emplace(m-1, i);
+      a[m-1][i] |= 2;
+    }
+    bfs(2);
+    vector<pair<int, int>> r;
+    REP(i, m)
+      REP(j, n)
+        if (a[i][j] == 3)
+          r.emplace_back(i, j);
+    return r;
+  }
+};
