@@ -14,4 +14,20 @@ impl Solution {
                     j0 = (j0+1+(j>>k&1))%3;
                     ok = ok && i0 != j0;
                 }
-                if ok { t
+                if ok { tr[i].push(j); }
+            }
+        }
+        let mut f = vec![1; ns];
+        let mut g = vec![0; ns];
+        for i in 1..n {
+            for j in 0..ns { g[j] = 0; }
+            for j in 0..ns {
+                for &k in tr[j].iter() {
+                    g[k] = (f[j]+g[k])%MOD;
+                }
+            }
+            for j in 0..ns { f[j] = g[j]; }
+        }
+        f.iter().fold(0, |acc,v| (acc+v)%MOD)
+    }
+}
