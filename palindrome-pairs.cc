@@ -11,4 +11,26 @@ class Solution {
       if (i < g && z[2*f-i] != g-i)
         z[i] = min(z[2*f-i], g-i);
       else {
-        g = max(g, f = i)
+        g = max(g, f = i);
+        for (; g < n && 2*f-g >= 0 && a[2*f-g] == a[g]; g++);
+        z[f] = g-f;
+      }
+  }
+public:
+  vector<vector<int>> palindromePairs(vector<string>& words) {
+    unordered_multimap<string, int> ls, rs;
+    REP(i, words.size()) {
+      string &w = words[i];
+      int n = w.size(), nn = 2*n+1;
+      a = string(nn, '.');
+      REP(j, n)
+        a[2*j+1] = w[j];
+      manacher(nn);
+      REP(j, nn) {
+        if (z[j] == j+1)
+          ls.emplace(w.substr((j+z[j])/2), i);
+        if (j+z[j] == nn)
+          rs.emplace(w.substr(0, (j-z[j]+1)/2), i);
+      }
+    }
+    vector<v
