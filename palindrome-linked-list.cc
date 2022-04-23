@@ -16,4 +16,20 @@ public:
     ListNode *x = head, *y = head;
     while (y->next && y->next->next) {
       x = x->next;
-      
+      y = y->next->next;
+    }
+    bool r = true;
+    x = rev(x->next);
+    y = head;
+    while (x) {
+      if (x->val != y->val) {
+        r = false;
+        break;
+      }
+      x = x->next;
+      y = y->next;
+    }
+    rev(x);
+    return r;
+  }
+};
