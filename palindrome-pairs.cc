@@ -33,4 +33,19 @@ public:
           rs.emplace(w.substr(0, (j-z[j]+1)/2), i);
       }
     }
-    vector<v
+    vector<vector<int>> ret;
+    REP(i, words.size()) {
+      string w = words[i], ww = w;
+      reverse(ww.begin(), ww.end());
+      auto its = ls.equal_range(ww);
+      for (auto it = its.first; it != its.second; ++it)
+        if (it->second != i)
+          ret.push_back(vector<int>{i, it->second});
+      its = rs.equal_range(ww);
+      for (auto it = its.first; it != its.second; ++it)
+        if (w.size() < words[it->second].size())
+          ret.push_back(vector<int>{it->second, i});
+    }
+    return ret;
+  }
+};
