@@ -24,4 +24,33 @@ public:
     int n = s.size();
     f.assign(n, vector<bool>(n));
     ROF(i, 0, n) {
-      f[i][i] = t
+      f[i][i] = true;
+      if (i+1 < n && s[i] == s[i+1])
+        f[i][i+1] = true;
+      FOR(j, i+2, n)
+        f[i][j] = f[i+1][j-1] && s[i] == s[j];
+    }
+    r.clear();
+    g(s, 0);
+    return r;
+  }
+};
+
+///
+
+#define REP1(i, n) for (remove_cv<remove_reference<decltype(n)>::type>::type i = 1; i <= (n); i++)
+
+class Solution {
+private:
+  vector<string> r;
+  vector<vector<string>> ret;
+  string s;
+  vector<int> r0, r1;
+  void dfs(int i) {
+    if (i == s.size()) {
+      ret.push_back(r);
+      return;
+    }
+    REP1(j, s.size()-i)
+      if ((j%2 ? r1 : r0)[i+j/2] >= (j+1)/2) {
+  
