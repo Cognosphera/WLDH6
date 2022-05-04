@@ -53,4 +53,24 @@ private:
     }
     REP1(j, s.size()-i)
       if ((j%2 ? r1 : r0)[i+j/2] >= (j+1)/2) {
-  
+        r.push_back(s.substr(i, j));
+        dfs(i+j);
+        r.pop_back();
+      }
+  }
+public:
+  vector<vector<string>> partition(string s) {
+    int n = s.size();
+    r0.assign(n, 0);
+    r1.assign(n, 0);
+    // r1[i]: 以i爲中心的奇數長度最長迴文子串的長度爲2*r1[i]-1，延伸到i+r1[i]-1
+    for (int f, g = 0, i = 0; i < n; i++)
+      if (i < g && r1[2*f-i] != g-i)
+        r1[i] = min(r1[2*f-i], g-i);
+      else {
+        f = i;
+        g = max(g, i);
+        for (; g < n && 2*f >= g && s[2*f-g] == s[g]; g++);
+        r1[i] = g-f;
+      }
+    // r0[i]: 以i-1和i和i爲中心的偶數長度最長迴文子串的長度爲2*r0[i]，延伸到
