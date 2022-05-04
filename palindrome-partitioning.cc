@@ -73,4 +73,19 @@ public:
         for (; g < n && 2*f >= g && s[2*f-g] == s[g]; g++);
         r1[i] = g-f;
       }
-    // r0[i]: 以i-1和i和i爲中心的偶數長度最長迴文子串的長度爲2*r0[i]，延伸到
+    // r0[i]: 以i-1和i和i爲中心的偶數長度最長迴文子串的長度爲2*r0[i]，延伸到i+r0[i]-1
+    for (int f, g = 0, i = 0; i < n; i++)
+      if (i < g && r0[2*f-i] != g-i)
+        r0[i] = min(r0[2*f-i], g-i);
+      else {
+        f = i;
+        g = max(g, i);
+        for (; g < n && 2*f-1 >= g && s[2*f-1-g] == s[g]; g++);
+        r0[i] = g-f;
+      }
+    this->s = std::move(s);
+    ret.clear();
+    dfs(0);
+    return ret;
+  }
+};
