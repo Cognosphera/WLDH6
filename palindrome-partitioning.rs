@@ -31,4 +31,23 @@ impl Solution {
         }
         g = 0;
         for i in 0..n {
-            c.r0[i] = if i < g && c.r0[2*f-i] != g-
+            c.r0[i] = if i < g && c.r0[2*f-i] != g-i { c.r0[2*f-i].min(g-i) } else {
+                f = i;
+                g = g.max(i);
+                while g < n && 2*f >= g+1 && a[2*f-1-g] == a[g] { g += 1; }
+                g-f
+            }
+        }
+        c.dfs(0);
+        c.ret
+    }
+}
+
+///
+
+impl Solution {
+    pub fn partition(s: String) -> Vec<Vec<String>> {
+        fn dfs<'a,'b>(s: &'a str, path: &'a [Vec<usize>], i: usize, ret: &'b mut Vec<Vec<String>>, r: &'b mut Vec<&'a str>) {
+            if i == s.len() {
+                ret.push(r.iter().map(|x| x.to_string()).collect());
+           
