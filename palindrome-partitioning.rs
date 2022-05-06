@@ -50,4 +50,21 @@ impl Solution {
         fn dfs<'a,'b>(s: &'a str, path: &'a [Vec<usize>], i: usize, ret: &'b mut Vec<Vec<String>>, r: &'b mut Vec<&'a str>) {
             if i == s.len() {
                 ret.push(r.iter().map(|x| x.to_string()).collect());
-           
+                return;
+            }
+            for &j in path[i].iter() {
+                r.push(&s[i..j]);
+                dfs(s, path, j, ret, r);
+                r.pop();
+            }
+        }
+
+        let a = s.as_bytes(); let n = a.len();
+        let mut f = 0; let mut g = 0;
+        let mut r0 = vec![0; n];
+        let mut r1 = vec![0; n];
+        let mut path = vec![vec![]; n];
+        for i in 0..n {
+            r1[i] = if i < g && r1[2*f-i] != g-i { r1[2*f-i].min(g-i) } else {
+                f = i;
+                g = g.max
