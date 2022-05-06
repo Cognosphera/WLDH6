@@ -18,3 +18,17 @@ impl Solution {
             }
         }
 
+        let a = s.as_bytes(); let n = a.len();
+        let mut f = 0; let mut g = 0;
+        let mut c = C { s: &s, r0: vec![0; n], r1: vec![0; n], ..Default::default() };
+        for i in 0..n {
+            c.r1[i] = if i < g && c.r1[2*f-i] != g-i { c.r1[2*f-i].min(g-i) } else {
+                f = i;
+                g = g.max(i);
+                while g < n && 2*f >= g && a[2*f-g] == a[g] { g += 1; }
+                g-f
+            }
+        }
+        g = 0;
+        for i in 0..n {
+            c.r0[i] = if i < g && c.r0[2*f-i] != g-
