@@ -67,4 +67,21 @@ impl Solution {
         for i in 0..n {
             r1[i] = if i < g && r1[2*f-i] != g-i { r1[2*f-i].min(g-i) } else {
                 f = i;
-                g = g.max
+                g = g.max(i);
+                while g < n && 2*f >= g && a[2*f-g] == a[g] { g += 1; }
+                g-f
+            };
+            for j in 0..r1[i] {
+                path[i-j].push(i+j+1);
+            }
+        }
+        g = 0;
+        for i in 0..n {
+            r0[i] = if i < g && r0[2*f-i] != g-i { r0[2*f-i].min(g-i) } else {
+                f = i;
+                g = g.max(i);
+                while g+1 < n && 2*f >= g && a[2*f-g] == a[g+1] { g += 1; }
+                g-f
+            };
+            for j in 0..r0[i] {
+                path[i-j].
