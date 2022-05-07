@@ -84,4 +84,12 @@ impl Solution {
                 g-f
             };
             for j in 0..r0[i] {
-                path[i-j].
+                path[i-j].push(i+j+2);
+            }
+        }
+        let mut ret = vec![];
+        let mut r = vec![];
+        dfs(&s, &path, 0, &mut ret, &mut r);
+        ret
+    }
+}
