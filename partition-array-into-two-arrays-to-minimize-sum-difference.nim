@@ -12,4 +12,21 @@ proc minimumDifference(nums: ptr UncheckedArray[cint], numsSize: int): int {.exp
       i = 0
       j = 0
       while i < result.len or j < result.len:
-        if i <
+        if i < result.len and (j == result.len or result[i] > result[j]+1 shl 32+x):
+          b.add result[i]
+          inc i
+        else:
+          b.add result[j]+1 shl 32+x
+          if i < result.len and result[i] == result[j]+1 shl 32+x: inc i
+          inc j
+      result.swap b
+    result.reverse
+
+  let
+    n = numsSize div 2
+    min = nums.toOpenArray(0, numsSize-1).toSeq.foldl(a.min(b))
+    num = nums.toOpenArray(0, numsSize-1).mapIt(it-min).toSeq
+    tot = num.foldl(a+b)
+    half = tot div 2
+    left = fn(num.toOpenArray(0, n-1))
+    right 
