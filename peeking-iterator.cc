@@ -26,3 +26,27 @@ public:
     // You should only use the Iterator interface methods.
     f = false;
   }
+
+  // Returns the next element in the iteration without advancing the iterator.
+  int peek() {
+    if (! f) {
+      f = true;
+      x = Iterator::next();
+    }
+    return x;
+  }
+
+  // hasNext() and next() should behave the same as in the Iterator interface.
+  // Override them if needed.
+  int next() {
+    if (f) {
+      f = false;
+      return x;
+    }
+    return Iterator::next();
+  }
+
+  bool hasNext() const {
+    return f || Iterator::hasNext();
+  }
+};
