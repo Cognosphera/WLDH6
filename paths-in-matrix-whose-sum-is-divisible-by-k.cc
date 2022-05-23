@@ -18,3 +18,9 @@ public:
             (y[j][(l+a[i][j])%k] += y[j-1][l]) %= P;
       }
       REP(j, n)
+        REP(l, k)
+          x[j][l] = exchange(y[j][l], 0);
+    }
+    return x[n-1][0];
+  }
+};
