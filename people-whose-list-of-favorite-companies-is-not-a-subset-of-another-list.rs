@@ -15,4 +15,19 @@ impl Solution {
         for i in 0..n { a[i].sort_unstable(); }
         let mut ans = vec![];
         for i in 0..n {
-            let mut ok
+            let mut ok = true;
+            for j in 0..n {
+                if i == j { continue; }
+                ok = false;
+                let mut k = 0;
+                for &c in a[i].iter() {
+                    while k < a[j].len() && a[j][k] < c { k += 1; }
+                    if k == a[j].len() || a[j][k] != c { ok = true; break; }
+                }
+                if !ok { break; }
+            }
+            if ok { ans.push(i as i32); }
+        }
+        ans
+    }
+}
