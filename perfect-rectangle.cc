@@ -43,4 +43,20 @@ public:
 class Solution {
 public:
   bool isRectangleCover(vector<vector<int>>& rectangles) {
-    long area = 0, x0 = INT_MAX, x1 = INT_MIN, y0 = INT_MAX, y1 = INT_MIN
+    long area = 0, x0 = INT_MAX, x1 = INT_MIN, y0 = INT_MAX, y1 = INT_MIN;
+    vector<pair<int, pair<int, int>>> b;
+    set<pair<int, int>> active;
+    for (auto& a: rectangles) {
+      x0 = min(x0, long(a[0]));
+      y0 = min(y0, long(a[1]));
+      x1 = max(x1, long(a[2]));
+      y1 = max(y1, long(a[3]));
+      area += (long(a[2])-a[0])*(long(a[3])-a[1]);
+      b.emplace_back(a[0]*2+1, make_pair(a[1], a[3]));
+      b.emplace_back(a[2]*2, make_pair(a[1], a[3]));
+    }
+    sort(b.begin(), b.end());
+    for (auto& a: b)
+      if (a.first % 2) {
+        auto it = active.lower_bound(a.second);
+        if (it != active.begin() && a.second.first < prev(it)->second
