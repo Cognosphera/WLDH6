@@ -59,4 +59,12 @@ public:
     for (auto& a: b)
       if (a.first % 2) {
         auto it = active.lower_bound(a.second);
-        if (it != active.begin() && a.second.first < prev(it)->second
+        if (it != active.begin() && a.second.first < prev(it)->second ||
+            it != active.end() && it->first < a.second.second)
+          return false;
+        active.insert(it, a.second);
+      } else
+        active.erase(a.second);
+    return area == (x1-x0)*(y1-y0);
+  }
+};
