@@ -13,4 +13,18 @@ class Solution {
 public:
   ListNode* plusOne(ListNode* head) {
     head = pointerReversal(head);
-    ListNo
+    ListNode* x = head;
+    while (x->val == 9) {
+      x->val = 0;
+      if (x->next)
+        x = x->next;
+      else {
+        x->next = new ListNode(0);
+        x = x->next;
+        break;
+      }
+    }
+    x->val++;
+    return pointerReversal(head);
+  }
+};
