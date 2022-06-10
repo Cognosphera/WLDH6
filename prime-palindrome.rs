@@ -17,4 +17,10 @@ impl Solution {
             loop {
                 i /= 10;
                 if i == 0 { break; }
- 
+                s = s*10+i%10;
+            }
+            if s >= n && s%2!=0 && is_prime(s) { return s; }
+        }
+        -1
+    }
+}
