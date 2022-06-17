@@ -11,4 +11,7 @@ public:
       a.emplace_back(arr[i], i);
     sort(ALL(a));
   }
-  int query(int left, int 
+  int query(int left, int right, int value) {
+    return upper_bound(ALL(a), pii{value, right}) - lower_bound(ALL(a), pii{value, left});
+  }
+};
