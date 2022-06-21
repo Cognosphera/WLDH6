@@ -7,4 +7,10 @@ public:
   NumArray(vector<int> &nums) {
     a = nums;
     FOR(i, 1, a.size())
-      a[
+      a[i] += a[i-1];
+  }
+
+  int sumRange(int i, int j) {
+    return a[j] - (i ? a[i-1] : 0);
+  }
+};
