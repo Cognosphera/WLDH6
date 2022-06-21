@@ -22,4 +22,12 @@ public:
     for (j++; i != j; ) {
       if (i < j) {
         s += a[j-1];
-  
+        j &= j-1;
+      } else {
+        s -= a[i-1];
+        i &= i-1;
+      }
+    }
+    return s;
+  }
+};
