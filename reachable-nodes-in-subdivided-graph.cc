@@ -28,4 +28,8 @@ public:
         swap(u, v);
       int tu = M-d[u];
       if (tu > 0)
-        ans += min(tu + max(M-d[v], 0), w
+        ans += min(tu + max(M-d[v], 0), w);
+    }
+    return ans;
+  }
+};
