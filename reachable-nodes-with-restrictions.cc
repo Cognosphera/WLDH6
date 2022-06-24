@@ -17,4 +17,9 @@ public:
       for (int v : es[u])
         if (!vis[v]) {
           vis[v] = 1;
-     
+          q.push_back(v);
+        }
+    }
+    return q.size();
+  }
+};
