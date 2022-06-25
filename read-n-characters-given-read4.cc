@@ -15,4 +15,7 @@ public:
       nr = read4(buf);
       buf += nr;
       c += nr;
-   
+    }
+    return min(c, n);
+  }
+};
