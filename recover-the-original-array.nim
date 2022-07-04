@@ -25,4 +25,16 @@ proc recover(a: seq[cint], used: var seq[int8], d: cint): seq[cint] {.exportc.} 
   return res
 
 proc recoverArray(nums: cintA, n: int, returnSize: ptr cint): cintA {.exportc.} =
-  var a = nums.toOpenArray(0, n-1).
+  var a = nums.toOpenArray(0, n-1).toSeq
+  var used = newSeq[int8](n)
+  a.sort
+  for i in 1..<n:
+    let d = a[i]-a[0]
+    if d == 0 or d mod 2 == 1: continue
+    var res = recover(a, used, d)
+    if res.len > 0:
+      returnSize[] = res.len.cint
+      result = cast[cintA](malloc((cint.sizeof * res.len).csize_t))
+      for i in 0..<res.len:
+        result[i] = res[i]
+      break
