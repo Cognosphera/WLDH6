@@ -28,4 +28,26 @@ public:
     for (; l > 1; l >>= 1, k <<= 1)
       mconcat(l, k);
   }
-  int get_sum(in
+  int get_sum(int l, int r) {
+    l += n-1, r += n;
+    int ls = 0, rs = 0;
+    for (; l^r^1; l >>= 1, r >>= 1) {
+      if (~l&1) ls += sum[l^1];
+      if (r&1) rs = sum[r^1]+rs;
+    }
+    return ls+rs;
+  }
+  int rectangleArea(vector<vector<int>>& rectangles) {
+    for (auto &r : rectangles) {
+      xs.push_back(r[0]);
+      xs.push_back(r[2]);
+    }
+    sort(ALL(xs));
+    xs.erase(unique(ALL(xs)), xs.end());
+    n = xs.size()-1;
+    tag.resize(n*2);
+    sum.resize(n*2);
+
+    vector<tuple<int,int,int,int>> a;
+    for (auto &r : rectangles) {
+      int x0 = lower_bound(
