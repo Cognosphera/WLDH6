@@ -50,4 +50,26 @@ public:
 
     vector<tuple<int,int,int,int>> a;
     for (auto &r : rectangles) {
-      int x0 = lower_bound(
+      int x0 = lower_bound(ALL(xs), r[0]) - xs.begin();
+      int x1 = lower_bound(ALL(xs), r[2]) - xs.begin();
+      a.emplace_back(r[1], x0, x1, 1);
+      a.emplace_back(r[3], x0, x1, -1);
+    }
+    sort(ALL(a), [](auto x, auto y) { return get<0>(x) < get<0>(y); });
+
+    int c = 0;
+    long y0 = get<0>(a[0]), ret = 0;
+    for (auto r : a) {
+      int y = get<0>(r);
+      if (y != y0)
+        ret = (ret + long(y-y0)*get_sum(0, n)) % 1000000007;
+      modify(get<1>(r), get<2>(r), get<3>(r));
+      y0 = y;
+    }
+    return ret;
+  }
+};
+
+/// power of 2
+
+#define ALL(x) (x).begin(
