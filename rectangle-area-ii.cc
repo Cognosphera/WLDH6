@@ -115,3 +115,19 @@ public:
       xs.push_back(r[0]);
       xs.push_back(r[2]);
     }
+    sort(ALL(xs));
+    xs.erase(unique(ALL(xs)), xs.end());
+    n = xs.size()-1;
+    ln = n > 1 ? 31-__builtin_clz(n-1)+1 : 0;
+    n = 1 << ln;
+    tag.resize(n*2);
+    sum.resize(n*2);
+
+    vector<tuple<int,int,int,int>> a;
+    for (auto &r : rectangles) {
+      int x0 = lower_bound(ALL(xs), r[0]) - xs.begin();
+      int x1 = lower_bound(ALL(xs), r[2]) - xs.begin();
+      a.emplace_back(r[1], x0, x1, 1);
+      a.emplace_back(r[3], x0, x1, -1);
+    }
+    sort(ALL(a), [](auto x, auto y) { return get<0>(x) < get<0>
