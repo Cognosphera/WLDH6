@@ -130,4 +130,17 @@ public:
       a.emplace_back(r[1], x0, x1, 1);
       a.emplace_back(r[3], x0, x1, -1);
     }
-    sort(ALL(a), [](auto x, auto y) { return get<0>(x) < get<0>
+    sort(ALL(a), [](auto x, auto y) { return get<0>(x) < get<0>(y); });
+
+    int c = 0;
+    long y0 = get<0>(a[0]), ret = 0;
+    for (auto r : a) {
+      int y = get<0>(r);
+      if (y != y0)
+        ret = (ret + long(y-y0)*sum[1]) % 1000000007;
+      modify(get<1>(r), get<2>(r), get<3>(r));
+      y0 = y;
+    }
+    return ret;
+  }
+};
