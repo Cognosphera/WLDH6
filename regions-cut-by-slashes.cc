@@ -23,4 +23,10 @@ public:
       default: me(t+0, t+1); me(t+1, t+2); me(t+2, t+3); break;
       }
       if (i) me(t+0, t-4*n+2);
-      i
+      if (j) me(t+1, t-4+3);
+    }
+    int r = 0;
+    REP(i, n*n*4) r += uf[i] == i;
+    return r;
+  }
+};
