@@ -1,0 +1,1 @@
+proc malloc(size: csize_t): point
