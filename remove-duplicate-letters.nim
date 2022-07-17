@@ -15,4 +15,4 @@ proc removeDuplicateLetters(s: cstring): cstring {.exportc.} =
       r.add s[i]
   result = cast[cstring](malloc(cast[csize_t](r.len+1)))
   for i in 0..r.high: result[i] = r[i]
-  result[r.len] = '
+  result[r.len] = '\0'
