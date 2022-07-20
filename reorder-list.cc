@@ -19,4 +19,9 @@ public:
     while (p != q && p->next) {
       ListNode *t = q->next;
       q->next = p->next;
-      p->next = p
+      p->next = p->next->next;
+      q->next->next = t;
+      q = q->next->next;
+    }
+  }
+};
