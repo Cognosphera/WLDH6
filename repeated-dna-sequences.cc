@@ -21,4 +21,29 @@ public:
 
 #define REP(i, n) FOR(i, 0, n)
 #define FOR(i, a, b) for (int i = (a); i < (b); i++)
-#define ROF(i, a, b) for (int i = (b); 
+#define ROF(i, a, b) for (int i = (b); --i >= (a); )
+#define k0(x) get<0>(x)
+#define k1(x) get<1>(x)
+#define id(x) get<2>(x)
+typedef tuple<int,int,int> E;
+
+template<int k>
+void radix_sort(const vector<E> &sa, int n, vector<E> &sa2, vector<int> &r)
+{
+  fill(r.begin(), r.end(), 0);
+  REP(i, n)
+    r[get<k>(sa[i])]++;
+  FOR(i, 1, n)
+    r[i] += r[i-1];
+  ROF(i, 0, n)
+    sa2[--r[get<k>(sa[i])]] = sa[i];
+}
+
+class Solution {
+public:
+  vector<string> findRepeatedDnaSequences(string a) {
+    int n = (int)a.size();
+    vector<E> sa(n), sa2(n);
+    vector<int> r(max(n, 127)), lcp(n);
+    vector<string> ret;
+    if
