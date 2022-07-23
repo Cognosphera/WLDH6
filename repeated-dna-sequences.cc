@@ -46,4 +46,21 @@ public:
     vector<E> sa(n), sa2(n);
     vector<int> r(max(n, 127)), lcp(n);
     vector<string> ret;
-    if
+    if (! n) return ret;
+    REP(i, n)
+      sa[i] = make_tuple(a[i], 0, i);
+    sort(sa.begin(), sa.end());
+    for (int k = 1; ; k *= 2) {
+      r[id(sa[0])] = 0;
+      FOR(i, 1, n)
+        r[id(sa[i])] = r[id(sa[i-1])] + (k0(sa[i-1]) < k0(sa[i]) || k1(sa[i-1]) < k1(sa[i]));
+      if (k >= n || r[id(sa[n-1])] == n-1) break;
+      REP(i, n)
+        sa[i] = make_tuple(r[i], i+k < n ? r[i+k]+1 : 0, i);
+      radix_sort<1>(sa, n, sa2, r);
+      radix_sort<0>(sa2, n, sa, r);
+    }
+    int k = 0;
+    REP(i, n)
+      if (r[i]) {
+        for (int j = id(sa[r[
