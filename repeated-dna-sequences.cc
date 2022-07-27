@@ -63,4 +63,18 @@ public:
     int k = 0;
     REP(i, n)
       if (r[i]) {
-        for (int j = id(sa[r[
+        for (int j = id(sa[r[i]-1]); a[i+k] == a[j+k]; k++);
+        lcp[r[i]] = k;
+        k && k--;
+      }
+    bool b = true;
+    FOR(i, 1, n)
+      if (lcp[i] < 10)
+        b = true;
+      else if (b) {
+        ret.push_back(a.substr(id(sa[i]), 10));
+        b = false;
+      }
+    return ret;
+  }
+};
