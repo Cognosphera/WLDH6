@@ -11,4 +11,8 @@ public:
         return A[i+1];
       n = c-A[i];
       c = 0;
-      i +
+      i += 2;
+    }
+    return -1;
+  }
+};
