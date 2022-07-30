@@ -22,4 +22,6 @@ public:
          r += f(s[i])-2*f(s[i-1]);
        else
          r += f(s[i]);
-  
+     return r;
+   }
+};
