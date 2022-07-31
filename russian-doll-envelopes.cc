@@ -11,4 +11,8 @@ public:
       if (b.end() == t)
         b.push_back(x.second);
       else
-        *t = x.secon
+        *t = x.second;
+    }
+    return b.size();
+  }
+};
