@@ -6,4 +6,8 @@ public:
     while (l < h) {
       int m = l+h >> 1;
       if (a[m/n][m%n] < b) l = m+1;
-      else h = 
+      else h = m;
+    }
+    return l < m*n && a[l/n][l%n] == b;
+  }
+};
