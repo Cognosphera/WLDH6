@@ -15,4 +15,16 @@ public:
         else h = m;
       }
       if (l < uu && a[l][q] == x) return true;
-   
+      return f(a, u, l, q+1, vv, x) || f(a, l, uu, v, q, x);
+    } else {
+      int p = (u+uu)/2, l = v, h = vv;
+      while (l < h) {
+        int m = (l+h)/2;
+        if (a[p][m] < x) l = m+1;
+        else h = m;
+      }
+      if (l < vv && a[p][l] == x) return true;
+      return f(a, p+1, uu, v, l, x) || f(a, u, p, l, vv, x);
+    }
+  }
+};
