@@ -25,3 +25,8 @@ public:
     REP(i, m) REP(j, n) {
       if (g[i][j] == 1)
         return -1;
+      ans = max(ans, g[i][j]-2);
+    }
+    return ans;
+  }
+};
