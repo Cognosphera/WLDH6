@@ -10,3 +10,11 @@ public:
       return x;
     };
     for (auto &eq : equations)
+      if (eq[1] == '=')
+        p[f(eq[0]-'a')] = f(eq[3]-'a');
+    for (auto &eq : equations)
+      if (eq[1] == '!' && f(eq[0]-'a') == f(eq[3]-'a'))
+        return false;
+    return true;
+  }
+};
