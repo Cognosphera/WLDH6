@@ -35,3 +35,7 @@ public:
         l = i+1;
       else
         h = i;
+    }
+    return l;
+  }
+};
