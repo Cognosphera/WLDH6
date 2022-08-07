@@ -14,4 +14,9 @@ public:
       for (; i < needs.size(); i++)
         if ((needs1[i] -= s[i]) < 0)
           break;
-      if (i == needs.size(
+      if (i == needs.size())
+        ans = min(ans, s[i] + shoppingOffers(price, special, needs1));
+    }
+    return r.first->second = ans;
+  }
+};
