@@ -5,3 +5,15 @@
 
 class Solution {
 public:
+  vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+    int n = grid.size(), m = grid[0].size(), g = 0;
+    vector<int> a(n*m);
+    REP(i, n) REP(j, m)
+      a[g++] = grid[i][j];
+    rotate(a.begin(), a.end()-k%(n*m), a.end());
+    g = 0;
+    REP(i, n) REP(j, m)
+      grid[i][j] = a[g++];
+    return grid;
+  }
+};
