@@ -16,4 +16,8 @@ impl Solution {
                 j = if j > 0 { border[j as usize-1] } else { -1 }; }
             j += 1;
         }
-  
+        let mut ss = String::from(&s[j as usize..n]).chars().rev().collect::<String>();
+        ss.push_str(&s);
+        ss
+    }
+}
