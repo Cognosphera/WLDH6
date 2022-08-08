@@ -8,4 +8,16 @@ public:
   }
 
   int shortest(string word1, string word2) {
-    vector<int> &b = a[word1], &c = a[word2
+    vector<int> &b = a[word1], &c = a[word2];
+    auto i = b.begin(), j = c.begin();
+    int r = INT_MAX;
+    while (i != b.end() && j != c.end()) {
+      r = min(r, abs(*i-*j));
+      if (*i < *j)
+        i++;
+      else
+        j++;
+    }
+    return r;
+  }
+};
