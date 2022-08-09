@@ -7,4 +7,7 @@ public:
       if (words[i] == word1)
         p = i, r = min(r, p-q);
       else if (words[i] == word2)
-        q = i, r = min
+        q = i, r = min(r, q-p);
+    return r;
+  }
+};
