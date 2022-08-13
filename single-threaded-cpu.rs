@@ -8,4 +8,21 @@ impl Solution {
         tasks.sort_by_key(|v| v.0);
 
         let mut q: BinaryHeap<Reverse<(i32, usize)>> = BinaryHeap::new();
-  
+        let mut ans = Vec::new();
+        let mut tick = 0;
+        let mut i = 0;
+        while ans.len() != n {
+            if i < n && tasks[i].0 <= tick {
+                q.push(Reverse((tasks[i].1, tasks[i].2)));
+                i += 1;
+            } else if !q.is_empty() {
+                let x = q.pop().unwrap().0;
+                ans.push(x.1 as i32);
+                tick += x.0;
+            } else {
+                tick = tasks[i].0;
+            }
+        }
+        ans
+    }
+}
