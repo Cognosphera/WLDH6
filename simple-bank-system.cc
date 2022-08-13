@@ -19,4 +19,8 @@ public:
   }
 
   bool withdraw(int x, long long mo) {
-  
+    if (!f(x) || a[x-1] < mo) return false;
+    a[x-1] -= mo;
+    return true;
+  }
+};
