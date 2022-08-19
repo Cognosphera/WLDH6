@@ -40,4 +40,11 @@ public:
     for (int i = 0; i < k; i++)
       add(lower_bound(a.begin(), a.end(), nums[i])-a.begin(), n, 1);
     for (int i = k; i <= nums.size(); i++) {
-      r.push_back(0.5*(double(a[select((k-1)/2, n)]
+      r.push_back(0.5*(double(a[select((k-1)/2, n)])+a[select(k/2, n)]));
+      add(lower_bound(a.begin(), a.end(), nums[i-k])-a.begin(), n, -1);
+      if (i < nums.size())
+        add(lower_bound(a.begin(), a.end(), nums[i])-a.begin(), n, 1);
+    }
+    return r;
+  }
+};
