@@ -27,4 +27,8 @@ class Solution {
     return l;
   }
 public:
-  int minArea(vector<vector<char>> &a, int x, i
+  int minArea(vector<vector<char>> &a, int x, int y) {
+    return (row(a, x+1, a.size(), true) - row(a, 0, x, false)) *
+      (column(a, y+1, a[0].size(), true) - column(a, 0, y, false));
+  }
+};
