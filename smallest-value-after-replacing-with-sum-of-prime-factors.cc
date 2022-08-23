@@ -11,4 +11,12 @@ class Solution {
     if (n > 1)
       s += n;
     return s;
-  
+  }
+public:
+  int smallestValue(int n) {
+    int x;
+    while ((x = f(n)) != n)
+      n = x;
+    return x;
+  }
+};
