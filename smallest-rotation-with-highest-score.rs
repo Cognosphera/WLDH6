@@ -5,4 +5,7 @@
 impl Solution {
     pub fn best_rotation(nums: Vec<i32>) -> i32 {
         let n = nums.len();
-        let mut d = (0..n
+        let mut d = (0..n).fold(vec![1i32;n], |mut d,i| {d[(n+i+1-nums[i] as usize)%n] -= 1; d});
+        (1..n).fold(0, |ans,i| if {d[i]+=d[i-1]; d[i]>d[ans]} {i} else {ans}) as i32
+    }
+}
