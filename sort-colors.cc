@@ -50,4 +50,8 @@ public:
     int c[3] = {};
     for (auto x: a)
       c[x]++;
-    fill_n(a.begin(), c[0],
+    fill_n(a.begin(), c[0], 0);
+    fill_n(a.begin()+c[0], c[1], 1);
+    fill_n(a.begin()+c[0]+c[1], c[2], 2);
+  }
+};
