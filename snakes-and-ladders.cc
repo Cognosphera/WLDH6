@@ -32,3 +32,5 @@ public:
         }
     }
     return d[m*n-1];
+  }
+};
