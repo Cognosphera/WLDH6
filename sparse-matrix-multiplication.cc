@@ -23,4 +23,9 @@ public:
         auto &colB = iB.second;
         for (auto x: rowA)
           if (colB.count(x.first))
-     
+            C[i][j] += x.second * colB[x.first];
+      }
+    }
+    return C;
+  }
+};
