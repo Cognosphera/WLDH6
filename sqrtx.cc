@@ -8,4 +8,6 @@ public:
     int y = 46340, z;
     while ((z = (y+x/y)>>1) < y)
       y = z;
-    ret
+    return y;
+  }
+};
