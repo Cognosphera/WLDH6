@@ -30,4 +30,6 @@ impl Solution {
                         adj[c].insert(grid[i][j] as usize); }}}
         }
         let mut vis = vec![0; nc];
-        !(1..nc).any(|c| vis[c] == 0 && cycle(c, &mut 
+        !(1..nc).any(|c| vis[c] == 0 && cycle(c, &mut vis, &adj))
+    }
+}
