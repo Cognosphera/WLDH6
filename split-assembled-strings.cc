@@ -15,4 +15,16 @@ public:
     string ans;
     REP(i, n)
       REP(e, 2) {
-        REP(j, 
+        REP(j, strs[i].size()) {
+          string r = strs[i].substr(j);
+          FOR(k, i+1, n) r += strs[k];
+          REP(k, i) r += strs[k];
+          r += strs[i].substr(0, j);
+          ans = max(ans, r);
+        }
+        reverse(ALL(strs[i]));
+      }
+    return ans;
+  }
+};
+
