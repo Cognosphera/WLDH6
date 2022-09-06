@@ -27,4 +27,18 @@ public:
           c = a-b;
           oc = c;
           do if (S[k]-'0' != oc % 10) goto nxt;
-          while (k
+          while (k--, oc /= 10);
+          a = b;
+          b = c;
+          ret.push_back(c);
+        }
+      nxt:
+        if (k < 0 && ret.size() >= 3) {
+          reverse(ALL(ret));
+          return ret;
+        }
+      }
+    }
+    return {};
+  }
+};
