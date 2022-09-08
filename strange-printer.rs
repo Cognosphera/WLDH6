@@ -13,4 +13,5 @@ impl Solution {
                         dp[i][j] = dp[i][j].min(dp[i][k] + if k+1 <= j-1 {dp[k+1][j-1]} else {0});
                     }}}}
         dp[0][n-1]
-    
+    }
+}
