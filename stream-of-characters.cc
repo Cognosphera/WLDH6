@@ -36,4 +36,19 @@ public:
       x->end |= pool[x->pi].end;
       for (int c = 0; c < 26; c++)
         if (!x->c[c])
-        
+          x->c[c] = pool[x->pi].c[c];
+        else {
+          pool[x->c[c]].pi = pool[x->pi].c[c];
+          q[qs++] = x->c[c];
+        }
+    }
+    x = pool;
+  }
+
+  ~StreamChecker() { free(pool); }
+
+  bool query(char letter) {
+    x = pool+x->c[letter-'a'];
+    return x->end;
+  }
+};
