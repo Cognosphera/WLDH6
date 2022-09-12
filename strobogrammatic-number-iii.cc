@@ -24,4 +24,16 @@ class Solution {
             f = true;
             pat[i] = q[0];
             pat[n-i-1] = q[1];
-       
+          }
+        }
+      }
+    }
+    if (f && (inclusive ? pat <= high : pat < high))
+      s++;
+    return s;
+  }
+public:
+  int strobogrammaticInRange(string low, string high) {
+    return max(0, f(high, true) - f(low, false) + (low == "0"));
+  }
+};
