@@ -16,4 +16,14 @@ public:
           if (! i)
             (dp1[i+1][0] += dp[i][j]) %= MOD;
           if (j < 2)
-          
+            (dp1[i][j+1] += dp[i][j]) %= MOD;
+        }
+      memcpy(dp, dp1, sizeof dp1);
+    }
+    int r = 0;
+    REP(i, 2)
+      REP(j, 3)
+        (r += dp[i][j]) %= MOD;
+    return r;
+  }
+};
