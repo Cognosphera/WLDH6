@@ -12,4 +12,19 @@ public:
       return r;
     for (auto x: L)
       ++ss[x];
-    R
+    REP(i, n-m+1) {
+      bool f = true;
+      tt.clear();
+      for (int j = i; j < i+L.size()*m; j += m) {
+        string t = S.substr(j, m);
+        if (! ss.count(t) || ++tt[t] > ss[t]) {
+          f = false;
+          break;
+        }
+      }
+      if (f)
+        r.push_back(i);
+    }
+    return r;
+  }
+};
