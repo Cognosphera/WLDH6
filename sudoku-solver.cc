@@ -49,4 +49,25 @@ private:
   }
 public:
   void solveSudoku(vector<vector<char> > &a) {
-    int cur = MAXC
+    int cur = MAXC+1, lo, hi;
+    REP(i, cur) {
+      L[i] = i-1;
+      R[i] = i+1;
+      U[i] = D[i] = i;
+      size[i] = 0;
+    }
+    R[L[0] = MAXC] = 0;
+    REP(i, N)
+      REP(j, N) {
+        if (a[i][j] != '.') {
+          lo = a[i][j]-'1';
+          hi = a[i][j]-'0';
+        } else {
+          lo = 0;
+          hi = 9;
+        }
+        for (int k = lo; k < hi; k++) {
+          append(cur, cur+3, cur+1, i*N+k);
+          append(cur+1, cur, cur+2, N*N+j*N+k);
+          append(cur+2, cur+1, cur+3, N*N*2+i*N+j);
+          appe
