@@ -9,4 +9,4 @@ proc getSumAbsoluteDifferences(a: cintA, n: int, returnSize: ptr cint): cintA {.
   for i in 0..<n:
     result[0] += a[i]-a[0]
   for i in 1..<n:
-    result[i] = result[i-1] + ((2
+    result[i] = result[i-1] + ((2*i-n)*(a[i]-a[i-1])).cint
