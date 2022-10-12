@@ -70,4 +70,11 @@ public:
           append(cur, cur+3, cur+1, i*N+k);
           append(cur+1, cur, cur+2, N*N+j*N+k);
           append(cur+2, cur+1, cur+3, N*N*2+i*N+j);
-          appe
+          append(cur+3, cur+2, cur, N*N*3+(i/3*3+j/3)*N+k);
+          fill_n(mean+cur, 4, (i*N+j)*N+k);
+          cur += 4;
+        }
+      }
+    dlx(a);
+  }
+};
