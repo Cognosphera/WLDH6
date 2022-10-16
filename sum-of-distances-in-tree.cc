@@ -24,4 +24,12 @@ public:
     n = N;
     es.resize(N);
     ss.resize(N);
-    an
+    ans.resize(N);
+    for (auto& e:edges) {
+      es[e[0]].push_back(e[1]);
+      es[e[1]].push_back(e[0]);
+    }
+    g(0, -1, f(0, -1, 0));
+    return ans;
+  }
+};
