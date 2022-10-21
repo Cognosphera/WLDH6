@@ -22,4 +22,10 @@ impl Solution {
         let mut freqs = vec![0; 100001];
         for &x in nums.iter() {
             *freq.entry(x).or_insert(0) += 1;
-            freqs[
+            freqs[x as usize] += 1;
+        }
+        for i in 1..freqs.len() { freqs[i] += freqs[i-1]; }
+        (freq.iter().fold(0, |ans,(&x,&f)| ans + (x as usize..freqs.len()).step_by(x as usize)
+           .fold(0, |acc,i| acc+nums.len()-freqs[i-1]) * f as usize) % 1000000007) as i32
+    }
+}
