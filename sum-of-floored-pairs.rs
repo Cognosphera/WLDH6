@@ -6,4 +6,20 @@ impl Solution {
         let mut freq: HashMap<i32, i32> = HashMap::with_capacity(nums.len());
         for &x in nums.iter() { *freq.entry(x).or_insert(0) += 1; }
         for (&x, &f) in freq.iter() {
-            for 
+            for i in (x as usize..a.len()).step_by(x as usize) {
+                a[i] += f as usize; }}
+        for i in 1..a.len() { a[i] += a[i-1]; }
+        (nums.iter().fold(0, |acc,&x| acc+a[x as usize]) % 1000000007) as i32
+    }
+}
+
+///
+
+impl Solution {
+    pub fn sum_of_floored_pairs(nums: Vec<i32>) -> i32 {
+        use std::collections::HashMap;
+        let mut freq: HashMap<i32, i32> = HashMap::new();
+        let mut freqs = vec![0; 100001];
+        for &x in nums.iter() {
+            *freq.entry(x).or_insert(0) += 1;
+            freqs[
