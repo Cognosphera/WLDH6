@@ -10,3 +10,9 @@ public:
     REP(i, n) {
       if (i == n-1 || a[i]+1 != a[i+1]) {
         r.push_back(s == i ? to_string(a[i]) : to_string(a[s])+"->"+to_string(a[i]));
+        s = i+1;
+      }
+    }
+    return r;
+  }
+};
