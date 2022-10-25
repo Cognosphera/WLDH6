@@ -21,4 +21,9 @@ public:
     REP(i, n) {
       long li = l[i], ri = r[i];
       long left = (c[i]-c[li+1] - li*(b[i]-b[li+1])) % P;
-    
+      long right = ((b[ri]-b[i])*ri - c[ri]+c[i]) % P;
+      ret += ((ri-i)*left + (i-li)*right) % P * a[i] % P;
+    }
+    return (ret%P+P)%P;
+  }
+};
