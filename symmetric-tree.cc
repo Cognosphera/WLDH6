@@ -7,4 +7,6 @@ public:
   bool f(TreeNode *x, TreeNode *y) {
     if (! x && ! y) return true;
     if (! x || ! y) return false;
-    return x->val == y->val && f(x->left, y->right) && f(x
+    return x->val == y->val && f(x->left, y->right) && f(x->right, y->left);
+  }
+};
