@@ -26,4 +26,14 @@ public:
       xs.pop_back();
       ys.pop_back();
       REP(d, 4) {
-        int xx = x+(int[]){-1,0,1,0}[d], yy = y+(i
+        int xx = x+(int[]){-1,0,1,0}[d], yy = y+(int[]){0,1,0,-1}[d];
+        if (unsigned(xx) < m && unsigned(yy) < n && a[xx][yy] == 'O')
+          f(xx, yy);
+      }
+    }
+    REP(i, m)
+      REP(j, n)
+        if (a[i][j] == 'O') a[i][j] = 'X';
+        else if (a[i][j] == 'Y') a[i][j] = 'O';
+  }
+};
