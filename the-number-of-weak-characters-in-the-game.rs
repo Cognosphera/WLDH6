@@ -11,3 +11,7 @@ impl Solution {
                 ans += 1;
             }
             a.push(p[1]);
+        }
+        ans
+    }
+}
