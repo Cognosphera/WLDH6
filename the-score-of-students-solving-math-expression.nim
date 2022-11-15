@@ -19,4 +19,23 @@ proc scoreOfStudents(s: cstring, answers: ptr UncheckedArray[cint], answersSize:
     while ops[i] == '*':
       inc i
       x *= nums[i]
-    expec
+    expected += x
+    inc i
+
+  for i in countdown(n-1, 0):
+    b[i][i].add(nums[i])
+    for j in i+1..<n:
+      tmp.clear
+      for k in i..<j:
+        for x in b[i][k]:
+          for y in b[k+1][j]:
+            tmp.incl(if ops[k] == '+': x+y else: x*y)
+      for x in tmp:
+        b[i][j].add(x)
+
+  let tab = toHashSet(b[0][n-1])
+  for i in 0..<answersSize:
+    if answers[i] == expected:
+      result += 5
+    elif answers[i] in tab:
+      result += 2
