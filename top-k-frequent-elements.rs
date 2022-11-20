@@ -10,4 +10,19 @@ impl Solution {
             let pivot = a[hi-1].1;
             let mut p = lo;
             for i in lo..hi {
-     
+                if a[i].1 < pivot {
+                    let t = a[p]; a[p] = a[i]; a[i] = t;
+                    p += 1;
+                }
+            }
+            let t = a[p]; a[p] = a[hi-1]; a[hi-1] = t;
+            if k < p { nth(a, lo, p, k); }
+            else if k > p { nth(a, p+1, hi, k); }
+        }
+
+        let n = a.len();
+        let k = n-k as usize;
+        nth(&mut a[..], 0, n, k);
+        a.drain(k..).map(|x| x.0).collect()
+    }
+}
