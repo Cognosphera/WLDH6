@@ -10,3 +10,18 @@ public:
     set<pii> s;
     REP(i, can)
       s.emplace(a[i], i), s.emplace(a[n-1-i], n-1-i);
+    while (k--) {
+      auto it = s.begin();
+      res += it->first;
+      int i = it->second;
+      if (l < r) {
+        if (i < l)
+          s.emplace(a[l], l), l++;
+        else
+          r--, s.emplace(a[r], r);
+      }
+      s.erase(it);
+    }
+    return res;
+  }
+};
