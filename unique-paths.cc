@@ -17,4 +17,22 @@ public:
       REP(j, s) {
         a[j] = a[j]*(n-i)+c;
         c = a[j]/TEN;
-        
+        a[j] %= TEN;
+      }
+      if (c) {
+        a[s++] = c;
+        c = 0;
+      }
+      ROF(j, 0, s) {
+        a[j] = c*TEN+a[j];
+        c = a[j]%(i+1);
+        a[j] /= i+1;
+      }
+      while (! a[s-1])
+        s--;
+    }
+    if (s > 1)
+      a[0] += a[1]*TEN;
+    return a[0];
+  }
+};
