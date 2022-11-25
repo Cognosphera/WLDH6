@@ -12,4 +12,6 @@ public:
       l.erase(remove(l.begin(), l.end(), '.'), l.end());
       es.insert(ll + e.substr(t));
     }
-    retu
+    return es.size();
+  }
+};
