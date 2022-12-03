@@ -7,3 +7,11 @@ public:
       int c = p[i]-'a';
       if (i && p[i-1] != (c+25)%26+'a')
         l = 0;
+      if (++l > a[c]) {
+        r += l-a[c];
+        a[c] = l;
+      }
+    }
+    return r;
+  }
+};
