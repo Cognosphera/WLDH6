@@ -6,4 +6,10 @@ public:
     for (auto a: s)
       c[a-'a']++;
     for (auto a: t)
-      c[a
+      c[a-'a']--;
+    for (auto a: c)
+      if (a)
+        return false;
+    return true;
+  }
+};
