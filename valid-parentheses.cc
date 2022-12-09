@@ -12,4 +12,7 @@ public:
       case ')': case ']': case '}':
         if (st.empty() || (cc = st.top(), st.pop(), cc+1 != c && cc+2 != c))
           return false;
-   
+      }
+    return st.empty();
+  }
+};
