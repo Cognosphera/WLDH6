@@ -15,4 +15,13 @@ public:
         ROF(j, 0, i)
           (f[j] += f[j+1]) %= P;
       else {
-        in
+        int s = 0;
+        REP(j, i+2) {
+          int g = f[j];
+          f[j] = s;
+          (s += g) %= P;
+        }
+      }
+    return accumulate(f.begin(), f.end(), 0L) % P;
+  }
+};
