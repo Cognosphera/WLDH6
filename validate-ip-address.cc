@@ -24,4 +24,12 @@ class Solution {
         return false;
       p++;
     }
-    return a.s
+    return a.size() && a.back() != ':' && p == 8;
+  }
+public:
+  string validIPAddress(string IP) {
+    if (ipv4(IP)) return "IPv4";
+    if (ipv6(IP)) return "IPv6";
+    return "Neither";
+  }
+};
