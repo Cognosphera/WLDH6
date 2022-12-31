@@ -37,4 +37,20 @@ proc robotStep(o: ptr Robot, num: cint) {.exportc.} =
     else:
       if s <= o.y:
         o.y -= s
-        bre
+        break
+      s -= o.y
+      o.y = 0
+      o.d = 0
+
+proc robotGetPos(o: ptr Robot, retSize: ptr cint): cintA {.exportc.} =
+  result = cast[cintA](malloc(cast[csize_t](cint.sizeof * 2)))
+  retSize[] = 2
+  result[0] = o.x
+  result[1] = o.y
+
+proc robotGetDir(o: ptr Robot): cstring {.exportc.} =
+  let dir = ["East", "North", "West", "South"][o.d]
+  result = cast[cstring](malloc(cast[csize_t](dir.len+1)))
+  copyMem result, dir.cstring, dir.len+1
+
+proc robotFree(o: ptr Robot) {.exportc.} = dealloc o
