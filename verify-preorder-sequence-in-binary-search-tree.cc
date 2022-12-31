@@ -11,4 +11,8 @@ public:
         p = s.top();
         s.pop();
       }
-      s.pu
+      s.push(x);
+    }
+    return true;
+  }
+};
