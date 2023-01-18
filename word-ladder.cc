@@ -61,4 +61,28 @@ public:
         for (auto &y: left[l])
           if (hamming_one(r, y)) {
             string z = l+y;
-            if (dict.co
+            if (dict.count(z)) {
+              dict.erase(z);
+              q.push(z);
+              d[z] = dd+1;
+            }
+          }
+      if (right.count(r))
+        for (auto &y: right[r])
+          if (hamming_one(l, y)) {
+            string z = y+r;
+            if (dict.count(z)) {
+              dict.erase(z);
+              q.push(z);
+              d[z] = dd+1;
+            }
+          }
+    }
+    return d.count(end) ? d[end]+1 : 0;
+  }
+};
+
+/// bidirectional BFS + hamming distance trick
+
+class Solution {
+  bool hamming_one(const string &a, const string 
