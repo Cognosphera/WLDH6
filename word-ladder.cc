@@ -19,4 +19,28 @@ public:
           i[j] = c;
           if (dict.count(i)) {
             dict.erase(i);
-            q.push
+            q.push(i);
+            d[i] = dd+1;
+          }
+        }
+        i[j] = cc;
+      }
+    }
+    return d.count(end) ? d[end]+1 : 0;
+  }
+};
+
+/// hamming distance trick
+
+class Solution {
+  bool hamming_one(const string &a, const string &b) {
+    int i = 0, j = a.size();
+    while (i < j && a[i] == b[i]) i++;
+    while (i < j && a[j-1] == b[j-1]) j--;
+    return i == j-1;
+  }
+public:
+  int ladderLength(string start, string end, unordered_set<string> &dict) {
+    unordered_map<string, int> d;
+    unordered_map<string, vector<string>> left, right;
+    que
