@@ -43,4 +43,22 @@ public:
   int ladderLength(string start, string end, unordered_set<string> &dict) {
     unordered_map<string, int> d;
     unordered_map<string, vector<string>> left, right;
-    que
+    queue<string> q;
+    d[start] = 0;
+    dict.erase(start);
+    dict.insert(end);
+    int n = start.length();
+    for (auto &x: dict) {
+      string l = x.substr(0, n/2), r = x.substr(n/2);
+      left[l].push_back(r);
+      right[r].push_back(l);
+    }
+    for (q.push(start); ! q.empty(); ) {
+      string x = q.front(), l = x.substr(0, n/2), r = x.substr(n/2);
+      int dd = d[x];
+      q.pop();
+      if (left.count(l))
+        for (auto &y: left[l])
+          if (hamming_one(r, y)) {
+            string z = l+y;
+            if (dict.co
