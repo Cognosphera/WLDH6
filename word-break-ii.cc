@@ -14,4 +14,19 @@ class Solution {
       ans.push_back(ss);
     } else
       for (auto &w: dict)
-        if (w.size() <= n && s.compa
+        if (w.size() <= n && s.compare(n-w.size(), w.size(), w) == 0) {
+          parts.push_back(w.size());
+          dfs(n-w.size());
+          parts.pop_back();
+        }
+  }
+public:
+  vector<string> wordBreak(string s, vector<string>& wordDict) {
+    this->s = move(s);
+    dict = move(wordDict);
+    ans.clear();
+    parts.clear();
+    dfs(this->s.size());
+    return ans;
+  }
+};
