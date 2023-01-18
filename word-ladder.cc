@@ -85,4 +85,20 @@ public:
 /// bidirectional BFS + hamming distance trick
 
 class Solution {
-  bool hamming_one(const string &a, const string 
+  bool hamming_one(const string &a, const string &b) {
+    int i = 0, j = a.size();
+    while (i < j && a[i] == b[i]) i++;
+    while (i < j && a[j-1] == b[j-1]) j--;
+    return i == j-1;
+  }
+public:
+  int ladderLength(string start, string end, unordered_set<string> &dict) {
+    unordered_map<string, vector<string>> left, right;
+    int n = start.length(), d = 1;
+    dict.insert(start);
+    dict.insert(end);
+    for (auto &x: dict) {
+      string l = x.substr(0, n/2), r = x.substr(n/2);
+      left[l].push_back(r);
+      right[r].push_back(l);
+    }
