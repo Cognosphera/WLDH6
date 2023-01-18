@@ -17,4 +17,7 @@ impl Solution {
             }
         }
         let mut sol = Sol { dict: &word_dict, ans: vec![], parts: vec![] };
-        sol.df
+        sol.dfs(&s);
+        sol.ans
+    }
+}
