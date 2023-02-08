@@ -102,3 +102,24 @@ public:
       left[l].push_back(r);
       right[r].push_back(l);
     }
+    dict.erase(start);
+    dict.erase(end);
+    unordered_set<string> q0{start}, q1{end};
+    while (! q0.empty()) {
+      if (q0.size() > q1.size()) {
+        swap(q0, q1);
+        continue;
+      }
+      d++;
+      unordered_set<string> next;
+      for (auto &x: q0) {
+        string l = x.substr(0, n/2), r = x.substr(n/2);
+        if (left.count(l))
+          for (auto &y: left[l])
+            if (hamming_one(r, y)) {
+              string z = l+y;
+              if (q1.count(z))
+                return d;
+              if (dict.count(z)) {
+                dict.erase(z);
+        
