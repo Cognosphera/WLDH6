@@ -122,4 +122,24 @@ public:
                 return d;
               if (dict.count(z)) {
                 dict.erase(z);
-        
+                next.insert(z);
+              }
+            }
+        if (right.count(r))
+          for (auto &y: right[r])
+            if (hamming_one(l, y)) {
+              string z = y+r;
+              if (q1.count(z))
+                return d;
+              if (dict.count(z)) {
+                dict.erase(z);
+                next.insert(z);
+              }
+            }
+      }
+      q0.swap(next);
+      q0.swap(q1);
+    }
+    return 0;
+  }
+};
