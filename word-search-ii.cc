@@ -35,4 +35,25 @@ public:
     this->words = words;
     ans.clear();
     REP(i, m)
-      REP
+      REP(j, n)
+        f(i, j, root);
+    return ans;
+  }
+
+  void f(int i, int j, TrieNode *x) {
+    if (board[i][j] == '.') return;
+    x = x->c[board[i][j]-'a'];
+    if (! x) return;
+    if (x->id >= 0) {
+      ans.push_back(words[x->id]);
+      x->id = -1;
+    }
+    char c = board[i][j];
+    board[i][j] = '.';
+    if (i) f(i-1, j, x);
+    if (j+1 < n) f(i, j+1, x);
+    if (i+1 < m) f(i+1, j, x);
+    if (j) f(i, j-1, x);
+    board[i][j] = c;
+  }
+};
