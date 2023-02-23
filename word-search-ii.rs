@@ -14,4 +14,17 @@ impl Solution {
         }
 
         fn dfs(b: &mut Vec<Vec<char>>, ans: &mut Vec<String>, mut t: &mut Trie,
-               x: usize, y: usize) -> usiz
+               x: usize, y: usize) -> usize {
+            let ch = b[x][y];
+            if ch == '.' { return 0; }
+            if let Some(t1) = t.c[(ch as u8-b'a') as usize] {
+                t = &mut *t1;
+                if t.num == 0 { return 0; }
+                let mut num = 0;
+                if let Some(w) = t.w.take() {
+                    ans.push(w);
+                    num += 1;
+                }
+                b[x][y] = '.';
+                if x > 0 { num += dfs(b, ans, t, x-1, y); }
+                if x+1 < b.len() { num += dfs(b, ans, 
