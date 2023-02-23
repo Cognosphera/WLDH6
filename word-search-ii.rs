@@ -27,4 +27,22 @@ impl Solution {
                 }
                 b[x][y] = '.';
                 if x > 0 { num += dfs(b, ans, t, x-1, y); }
-                if x+1 < b.len() { num += dfs(b, ans, 
+                if x+1 < b.len() { num += dfs(b, ans, t, x+1, y); }
+                if y > 0 { num += dfs(b, ans, t, x, y-1); }
+                if y+1 < b[0].len() { num += dfs(b, ans, t, x, y+1); }
+                b[x][y] = ch;
+                t.num -= num;
+                return num;
+            }
+            0
+        }
+
+        let m = board.len();
+        let n = board[0].len();
+        let mut ans = vec![];
+        for x in 0..m {
+            for y in 0..n {
+                dfs(&mut board, &mut ans, &mut trie, x, y); } }
+        ans
+    }
+}
