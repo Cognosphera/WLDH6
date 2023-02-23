@@ -22,4 +22,12 @@ private:
   }
 public:
   bool exist(vector<vector<char> > &board, string word) {
-    if (word.empty(
+    if (word.empty()) return true;
+    REP(i, board.size())
+      REP(j, board[0].size())
+        if (f(board, i, j, word.c_str()))
+          return true;
+    return false;
+  }
+};
+
